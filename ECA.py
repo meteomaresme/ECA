@@ -2,196 +2,311 @@ import streamlit as st
 
 # --- 1. CONFIGURACIÓ DE LA PÀGINA ---------------------------------------------
 st.set_page_config(
-    page_title="BioExplorer | Hàbitats i Biomes",
-    page_icon="🌿",
+    page_title="BioEstudi | L'Eina Definitiva",
+    page_icon="📚",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # --- 2. BARRA LATERAL (SIDEBAR) -----------------------------------------------
 with st.sidebar:
-    st.title("🧭 BioExplorer")
-    st.markdown("La teva aventura interactiva pel medi natural.")
-    # <<< POSA EL TEU DIBUIX/LOGO AQUÍ
-    st.image("https://www.svgrepo.com/show/485308/eco-nature-leaves.svg", width=120)
+    st.title("📚 BioEstudi")
+    st.markdown("La guia completa d'hàbitats i biomes.")
     st.caption("Materials de la UF1 - MP02 Medi Natural")
 
     pagina = st.radio(
-        "Selecciona la teva missió:",
-        ["🏠 Inici", "🌍 Biomes Globals", "📊 Anàlisi Climàtica", "🇪🇸 Hàbitats d'Espanya", "🏞️ Hàbitats de Catalunya", "🧬 Conceptes Essencials", "🏆 Desafiament Final"],
-        captions=["Punt de partida", "Explora els grans ecosistemes", "Interpreta el clima", "La diversitat peninsular", "El nostre entorn proper", "El vocabulari del naturalista", "Posa't a prova!"]
+        "Selecciona el capítol:",
+        ["🏠 Portada", "🌍 Biomes del Món", "📊 Anàlisi Climàtica", "🇪🇸 Hàbitats d'Espanya", "🏞️ Hàbitats de Catalunya", "🧬 Conceptes Essencials", "🏆 Examen Final"],
+        captions=["Inici i resum", "Els grans ecosistemes terrestres", "Interpretació de climogrames", "Regions biogeogràfiques", "El nostre entorn natural", "El vocabulari imprescindible", "Avalua el teu coneixement"]
     )
     st.divider()
-    st.info("Dissenyat per fer l'estudi més visual i entretingut.")
+    st.info("Versió optimitzada per a la lectura: tot el contingut a la vista, sense distraccions.")
 
-
-# --- 3. FUNCIÓ PER AL QUIZ (DESAFIAMENT FINAL) -------------------------------
+# --- 3. FUNCIÓ PER AL QUIZ (EXAMEN FINAL) ------------------------------------
 def run_quiz():
-    st.title("🏆 Desafiament Final: Posa't a Prova!")
-    st.markdown("Has explorat els biomes i après els conceptes clau. És hora de demostrar el que saps!")
+    st.title("🏆 Examen Final")
+    st.markdown("Demostra que has assolit tots els coneixements. Sort!")
+    st.divider()
 
     preguntes = {
-        # ... (les preguntes es mantenen igual)
+        "Pregunta 1": {"pregunta": "Un climograma amb estius molt secs i temperatures altes és típic del clima...", "opcions": ["Polar", "Mediterrani", "Equatorial", "Oceànic"], "correcta": "Mediterrani"},
+        "Pregunta 2": {"pregunta": "Els roures i els faigs, arbres de fulla caduca, són dominants al bioma de...", "opcions": ["Tundra", "Desert", "Bosc temperat caducifoli", "Selva tropical"], "correcta": "Bosc temperat caducifoli"},
+        "Pregunta 3": {"pregunta": "Les plantes xeròfiles estan adaptades principalment a sobreviure a...", "opcions": ["La falta de llum", "El fred intens", "La sequera", "Els incendis"], "correcta": "La sequera"},
+        "Pregunta 4": {"pregunta": "La 'Lagartija aranesa', que només viu als Pirineus, és un exemple clar de...", "opcions": ["Endemisme", "Hotspot", "Bioma", "Espècie invasora"], "correcta": "Endemisme"},
+        "Pregunta 5": {"pregunta": "L'arbre que defineix una 'fageda' és...", "opcions": ["El pi (Pinus)", "L'alzina (Quercus ilex)", "El faig (Fagus sylvatica)", "El roure (Quercus robur)"], "correcta": "El faig (Fagus sylvatica)"},
+        "Pregunta 6": {"pregunta": "La classificació europea per catalogar hàbitats naturals i seminaturals s'anomena...", "opcions": ["WWF", "Natura 2000", "CORINE Biotopes", "Whittaker"], "correcta": "CORINE Biotopes"}
     }
 
-    # Inicialització de l'estat de la sessió per al quiz
-    if 'score' not in st.session_state:
-        st.session_state.score = 0
-        st.session_state.submitted = False
-        st.session_state.respostes_usuari = {}
+    if 'respostes_usuari' not in st.session_state:
+        st.session_state.respostes_usuari = {key: None for key in preguntes}
 
-    with st.form(key="quiz_form"):
-        for i, (key, value) in enumerate(preguntes.items()):
-            st.subheader(f"Pregunta {i+1}: {value['pregunta']}")
-            st.session_state.respostes_usuari[key] = st.radio("Tria una opció:", options=value["opcions"], key=f"q{i}", label_visibility="collapsed")
-        
-        submitted = st.form_submit_button("Corregeix el meu desafiament! 🚀", use_container_width=True)
+    for i, (key, value) in enumerate(preguntes.items()):
+        st.subheader(f"{i+1}. {value['pregunta']}")
+        st.session_state.respostes_usuari[key] = st.radio("Selecciona la resposta:", options=value["opcions"], key=f"q{i}", label_visibility="collapsed")
 
-    if submitted:
-        st.session_state.submitted = True
-        st.session_state.score = sum(1 for key, value in preguntes.items() if st.session_state.respostes_usuari[key] == value["correcta"])
-
-    if st.session_state.submitted:
-        st.header("Resultats del Desafiament")
+    st.divider()
+    if st.button("Finalitzar i Corregir Examen  M'examino!", use_container_width=True):
+        score = sum(1 for key, value in preguntes.items() if st.session_state.respostes_usuari[key] == value["correcta"])
         total = len(preguntes)
-        percentatge = st.session_state.score / total
+        percentatge = score / total
 
-        st.progress(percentatge, text=f"La teva puntuació: {st.session_state.score}/{total}")
+        st.header("Resultats de l'Avaluació")
+        st.progress(percentatge, text=f"Nota: {score} de {total}")
 
         if percentatge == 1.0:
-            st.balloons()
-            st.success("🎉 **EXCEL·LENT! PUNTUACIÓ PERFECTA!** Ets un autèntic expert/a en hàbitats! 🎉")
+            st.success("🎉 **MATRÍCULA D'HONOR!** Domini absolut de la matèria. Felicitats!")
         elif percentatge >= 0.7:
-            st.info("🌟 **MOLT BONA FEINA!** Tens un gran domini sobre la matèria.")
+            st.info("✅ **NOTABLE!** Molt bon resultat. Tens els conceptes clars.")
         elif percentatge >= 0.5:
-            st.warning("👍 **APROVAT!** Vas pel bon camí, però repassa els errors per millorar.")
+            st.warning(" aprobar **APROVAT.** Has superat l'examen, però revisa els errors per consolidar coneixements.")
         else:
-            st.error("📉 **NECESSITES REPASSAR.** No et desanimis! Torna a explorar les seccions i intenta-ho de nou.")
+            st.error("❌ **NECESSITA MILLORAR.** Repassa els capítols on has fallat. No et rendeixis!")
 
-        st.divider()
-        st.subheader("Revisió detallada:")
-        for key, value in preguntes.items():
-            if st.session_state.respostes_usuari[key] == value["correcta"]:
-                st.success(f"**{key}:** Correcte! ✔️ La teva resposta va ser '{st.session_state.respostes_usuari[key]}'.")
-            else:
-                st.error(f"**{key}:** Incorrecte. ❌ La resposta correcta era '{value['correcta']}', però vas triar '{st.session_state.respostes_usuari[key]}'.")
-        
-        if st.button("Tornar a intentar el Desafiament 🔄", use_container_width=True):
-            st.session_state.submitted = False
-            st.rerun()
+        with st.container(border=True):
+            st.subheader("Revisió detallada:")
+            for key, value in preguntes.items():
+                resposta_usuari = st.session_state.respostes_usuari[key]
+                resposta_correcta = value["correcta"]
+                if resposta_usuari == resposta_correcta:
+                    st.write(f"✔️ **{key}:** Correcte. La teva resposta '{resposta_usuari}' és la correcta.")
+                else:
+                    st.write(f"❌ **{key}:** Incorrecte. La resposta correcta era **'{resposta_correcta}'** (vas marcar '{resposta_usuari}').")
 
 # --- 4. CONTINGUT DE LES PÀGINES ---------------------------------------------
 
-# 🏠 PÀGINA D'INICI
-if pagina == "🏠 Inici":
-    st.title("🌿 Benvingut/da a BioExplorer!")
-    st.markdown("#### La teva eina interactiva per dominar la caracterització d'hàbitats.")
-    st.divider()
-
-    # <<< POSA EL TEU DIBUIX PRINCIPAL AQUÍ
-    st.image("https://cdni.iconscout.com/illustration/premium/thumb/save-earth-and-environment-8111248-6483162.png", caption="El nostre planeta està ple de vida per descobrir.")
+# 🏠 PORTADA
+if pagina == "🏠 Portada":
+    st.title("📚 Benvingut/da a BioEstudi")
+    st.markdown("#### La teva plataforma definitiva per estudiar els hàbitats i biomes de la UF1.")
+    st.info("Navega pels capítols utilitzant el menú de l'esquerra. Tot el contingut és visible directament per facilitar una lectura contínua i sense interrupcions.", icon="💡")
     
-    st.header("Què pots fer aquí?")
+    st.header("Contingut de la Guia")
     col1, col2, col3 = st.columns(3, gap="large")
     with col1:
-        st.metric(label="Explora", value="6 Biomes", delta="Globals")
-        st.markdown("- Viatja per selves, deserts i boscos.\n- Entén el seu clima, flora i fauna.")
+        st.metric(label="Biomes a Estudiar", value="5 Tipus")
+        st.markdown("- Bosc Temperat\n- Desert\n- Selva Tropical\n- Praderies\n- Bosc Mediterrani")
     with col2:
-        st.metric(label="Analitza", value="4 Climogrames", delta="Interactius")
-        st.markdown("- Aprèn a llegir el clima com un professional.\n- Identifica períodes de sequera i pluja.")
+        st.metric(label="Hàbitats de Catalunya", value="4 Boscos")
+        st.markdown("- La Fageda\n- L'Alzinar\n- Pineda de Pi Negre\n- Pineda de Pi Roig")
     with col3:
-        st.metric(label="Domina", value="+15 Conceptes", delta="Clau")
-        st.markdown("- Entén què és la biodiversitat, l'endemisme i molt més.\n- Posa't a prova amb el desafiament final.")
-    st.success("Comença la teva exploració utilitzant el menú de l'esquerra! 🧭")
+        st.metric(label="Conceptes Clau", value="+15 Termes")
+        st.markdown("- Biodiversitat\n- Endemisme\n- Hotspots\n- Adaptacions i més")
 
-# 🌍 PÀGINA DE BIOMES GLOBALS
-elif pagina == "🌍 Biomes Globals":
-    st.title("🌍 Biomes Globals: Els Grans Ecosistemes de la Terra")
-    st.markdown("Cada bioma és un món en si mateix, amb unes regles climàtiques i uns habitants únics.")
-
-    with st.expander("🤔 Què és exactament un Bioma?"):
-        st.info("Un **bioma** és una comunitat a gran escala d'organismes (plantes i animals) que comparteixen característiques comunes per a l'entorn en què existeixen. Es defineixen principalment pel **clima** i la **vegetació dominant**.")
+# 🌍 BIOMES DEL MÓN
+elif pagina == "🌍 Biomes del Món":
+    st.title("🌍 Biomes del Món")
+    st.markdown("Els grans ecosistemes de la Terra, definits pel clima i la vegetació.")
     
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Whittaker_biomes_plot.svg/1200px-Whittaker_biomes_plot.svg.png", caption="El Diagrama de Whittaker classifica els biomes segons temperatura i precipitació.")
+    with st.container(border=True):
+        st.subheader("🤔 Què és un Bioma?")
+        st.write("És el conjunt de comunitats de plantes i animals que ocupen una mateixa àrea geogràfica. Són unitats de gran extensió amb una vegetació climàtica uniforme i un clima característic.")
+    
+    st.subheader("📖 Classificació de Biomes (Whittaker)")
+    st.markdown("El diagrama de Whittaker és un dels sistemes de classificació més utilitzats. Relaciona la **temperatura mitjana anual** i la **precipitació anual** per definir els diferents biomes.")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Whittaker_biomes_plot.svg/1200px-Whittaker_biomes_plot.svg.png", caption="Gràfic de Whittaker. Eina clau, no una imatge decorativa.")
+    st.divider()
 
-    tab_names = ["🌳 Bosc Temperat", "🏜️ Desert", "🌴 Selva Tropical", "🌱 Praderies", "🌲 Bosc Mediterrani"]
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(tab_names)
+    st.header("Exploració dels Biomes Principals")
 
-    with tab1:
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            st.subheader("🌳 Bosc Temperat Caducifoli")
-            # <<< POSA EL TEU DIBUIX AQUÍ
-            st.image("https://cdni.iconscout.com/illustration/premium/thumb/autumn-season-3488582-2922253.png")
-        with col2:
-            st.markdown("- **Clima:** 4 estacions ben definides.\n- **Flora Típica:** Roures, faigs, aurons (perden la fulla a l'hivern).\n- **Fauna Clau:** Ós bru, cérvol, llop.")
-            with st.container(border=True):
-                st.markdown("🧠 **Sabies que...?** El canvi de color de les fulles a la tardor es deu a la pèrdua de clorofil·la, que revela altres pigments com els carotenoides (taronges) i les antocianines (vermells).")
-
-    # ... (pots seguir aquest mateix patró per a la resta de biomes)
-
-# 📊 PÀGINA D'ANÀLISI CLIMÀTICA
-elif pagina == "📊 Anàlisi Climàtica":
-    st.title("📊 Anàlisi Climàtica: Llegeix el Temps")
-    st.markdown("Un **climograma** és la radiografia del clima d'un lloc. Aprenem a interpretar-lo.")
-
+    # Bosc Temperat Caducifoli
+    st.subheader("🌳 Bosc Temperat Caducifoli")
     col1, col2 = st.columns(2)
     with col1:
-        st.info("""
-        #### Com llegir-lo?
-        *   **Línia Vermella (🌡️):** Temperatura mitjana.
-        *   **Barres Blaves (💧):** Precipitació mensual.
-        *   **El Truc de l'Aridesa:** Quan la línia de temperatura supera les barres de pluja (`Tª > 2P`), hi ha **estrès hídric** o sequera.
-        """)
+        st.markdown("- **Clima:** Temperat, amb 4 estacions marcades. Precipitacions abundants (750–1500 mm).\n- **Flora:** Arbres de fulla caduca com roures, faigs i aurons.\n- **Fauna:** Gran diversitat, incloent cérvols, esquirols, guineus i ossos.")
     with col2:
-        # <<< POSA EL TEU DIBUIX AQUÍ
-        st.image("https://cdni.iconscout.com/illustration/premium/thumb/weather-forecast-5208453-4351337.png")
+        st.info("🧠 **Dada Clau:** La paraula 'caducifoli' ve del llatí 'cadūcus' (caure) i 'folium' (fulla). La caiguda de les fulles a la tardor és una adaptació per conservar energia i aigua durant l'hivern fred.")
+    st.divider()
 
+    # Desert
+    st.subheader("🏜️ Desert")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("- **Clima:** Molt àrid (< 250 mm/any). Grans oscil·lacions tèrmiques entre el dia i la nit.\n- **Flora:** Plantes xeròfiles altament adaptades, com cactus i suculentes, amb fulles petites o espines.\n- **Fauna:** Animals adaptats a la sequera, sovint amb hàbits nocturns, com rèptils, escorpins i petits rosegadors.")
+    with col2:
+        st.info("🧠 **Dada Clau:** No tots els deserts són calorosos. N'hi ha de freds, com el desert del Gobi a l'Àsia, on les temperatures hivernals poden baixar fins a -40°C.")
     st.divider()
     
-    # Element interactiu: Selectbox
-    clima_seleccionat = st.selectbox(
-        "Selecciona un exemple de clima per analitzar el seu climograma:",
-        ["Clima Mediterrani (Nàpols)", "Clima Equatorial (Akassa)", "Clima Desèrtic (Alexandria)", "Clima Polar (Thule)"]
-    )
+    # Selva Tropical
+    st.subheader("🌴 Selva Tropical")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("- **Clima:** Càlid i molt plujós durant tot l'any, sense estacions marcades.\n- **Flora:** La més diversa del planeta, estructurada en estrats (pisos). Abunden les lianes i les plantes epífites.\n- **Fauna:** Enorme biodiversitat, amb milions d'espècies d'insectes, amfibis, rèptils i mamífers.")
+    with col2:
+        st.info("🧠 **Dada Clau:** Tot i que només cobreixen un 6% de la superfície terrestre, les selves tropicals alberguen més de la meitat de totes les espècies de plantes i animals del món.")
+    st.divider()
+
+    # Praderies
+    st.subheader("🌱 Praderies (Estepa)")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("- **Clima:** Semiàrid amb gran amplitud tèrmica (estius calorosos, hiverns freds).\n- **Flora:** Domini absolut de les herbes (gramínies). Els arbres són escassos, limitats a les ribes dels rius.\n- **Fauna:** Grans mamífers herbívors com bisons, antílops i cavalls salvatges.")
+    with col2:
+        st.info("🧠 **Dada Clau:** Els sòls de les praderies són extremadament fèrtils, motiu pel qual moltes d'aquestes àrees s'han convertit en les principals zones agrícoles del món (el "graner del món").")
+    st.divider()
+
+    # Bosc Mediterrani
+    st.subheader("🌲 Bosc Mediterrani (Escleròfil)")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("- **Clima:** Estius calorosos i secs; hiverns suaus i plujosos.\n- **Flora:** Vegetació escleròfil·la (de fulla dura i perenne) adaptada a la sequera estival, com alzines, sureres i pins.\n- **Fauna:** Adaptada a la sequera, com el porc senglar, la guineu, la geneta i el linx ibèric.")
+    with col2:
+        st.info("🧠 **Dada Clau:** Moltes plantes mediterrànies són piròfites, és a dir, estan adaptades al foc. Algunes, com l'estepa, necessiten la calor d'un incendi per germinar les seves llavors.")
+
+# 📊 ANÀLISI CLIMÀTICA
+elif pagina == "📊 Anàlisi Climàtica":
+    st.title("📊 Anàlisi Climàtica mitjançant Climogrames")
+    st.markdown("El climograma és la millor eina per visualitzar les dades de clima d'una regió. A continuació s'analitzen els patrons principals.")
     
-    climogrames = {
-        "Clima Mediterrani (Nàpols)": ("https://i.imgur.com/1Gv2F1B.png", "Observa la caiguda dràstica de les pluges a l'estiu, coincidint amb el pic de temperatures. Aquest és el patró mediterrani clàssic!"),
-        "Clima Equatorial (Akassa)": ("https://i.imgur.com/LhBvW4f.png", "Temperatures altes i constants, i pluges torrencials durant tot l'any. No hi ha estació seca."),
-        "Clima Desèrtic (Alexandria)": ("https://i.imgur.com/Uf1C29X.png", "Les barres de precipitació són gairebé invisibles. L'aridesa és extrema durant tot l'any."),
-        "Clima Polar (Thule)": ("https://i.imgur.com/U6LzJ7m.png", "La línia de temperatura està gairebé sempre per sota de 0°C. Les precipitacions són molt escasses i en forma de neu.")
-    }
+    with st.container(border=True):
+        st.subheader("📖 Com llegir un Climograma?")
+        st.markdown("""
+        1.  **Eix Horitzontal (X):** Els mesos de l'any.
+        2.  **Eix Vertical Esquerre (🌡️):** Temperatura en `°C`, representada per una **línia vermella**.
+        3.  **Eix Vertical Dret (💧):** Precipitació en `mm`, representada per **barres blaves**.
+        
+        **Regla Clau:** Es considera que hi ha **període d'aridesa** quan la línia de temperatures està per sobre de les barres de precipitació.
+        """)
+    st.divider()
 
-    url, descripcio = climogrames[clima_seleccionat]
-    st.image(url, caption=f"Climograma de: {clima_seleccionat.split('(')[1][:-1]}")
-    st.success(f"**Anàlisi ràpida:** {descripcio}")
+    st.header("Exemples de Climogrames per Clima")
 
-# ... (I així successivament per a la resta de pàgines, seguint aquesta línia de disseny visual i interactiu)
+    # Equatorial
+    st.subheader("📈 Climograma Equatorial (Akassa, Congo)")
+    st.image("https://i.imgur.com/LhBvW4f.png", caption="Climograma d'Akassa.")
+    st.success("**Anàlisi:** Temperatures altes i estables durant tot l'any (línia gairebé plana). Precipitacions extremadament abundants i constants, sense cap mes sec. Correspon a la selva tropical.")
 
-# 🧬 PÀGINA DE CONCEPTES ESSENCIALS
+    # Mediterrani
+    st.subheader("📉 Climograma Mediterrani (Nàpols, Itàlia)")
+    st.image("https://i.imgur.com/1Gv2F1B.png", caption="Climograma de Nàpols.")
+    st.success("**Anàlisi:** Hiverns suaus i plujosos. Estius calorosos i molt secs, amb un clar període d'aridesa on la línia de temperatura supera les precipitacions. Aquesta "depressió" estival de la pluja és la seva característica principal.")
+    
+    # Desèrtic
+    st.subheader("🏜️ Climograma Desèrtic (Alexandria, Egipte)")
+    st.image("https://i.imgur.com/Uf1C29X.png", caption="Climograma d'Alexandria.")
+    st.success("**Anàlisi:** Precipitacions gairebé inexistents durant tot l'any (barres molt baixes). L'aridesa és la norma. Les temperatures poden ser altes, com en aquest cas.")
+
+    # Polar
+    st.subheader("❄️ Climograma Polar (Thule, Grenlàndia)")
+    st.image("https://i.imgur.com/U6LzJ7m.png", caption="Climograma de Thule.")
+    st.success("**Anàlisi:** Temperatures extremadament baixes. La línia està per sota dels 0°C la major part de l'any. Precipitacions molt escasses i sempre en forma de neu.")
+
+# 🇪🇸 HÀBITATS D'ESPANYA
+elif pagina == "🇪🇸 Hàbitats d'Espanya":
+    st.title("🇪🇸 Hàbitats d'Espanya")
+    st.markdown("La Península Ibèrica, per la seva ubicació i relleu, és un dels 'hotspots' de biodiversitat d'Europa.")
+    
+    st.header("Les Grans Regions Biogeogràfiques")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Regiones_biogeogr%C3%A1ficas_de_Espa%C3%B1a_2001.png/800px-Regiones_biogeogr%C3%A1ficas_de_Espa%C3%B1a_2001.png", caption="Mapa oficial de les regions biogeogràfiques d'Espanya.")
+    
+    st.subheader("🟢 Regió Eurosiberiana")
+    st.markdown("Correspon al nord de la península (la 'Espanya verda': Galícia, Astúries, Cantàbria, País Basc i Pirineus).")
+    st.markdown("- **Clima:** Temperat i humit, sense aridesa a l'estiu.\n- **Vegetació:** Boscos caducifolis, principalment rouredes i fagedes.")
+
+    st.subheader("🟠 Regió Mediterrània")
+    st.markdown("Ocupa el 80% de la Península i les Illes Balears. És la regió més extensa.")
+    st.markdown("- **Clima:** Mediterrani, amb estius càlids i secs que provoquen estrès hídric a la vegetació.\n- **Vegetació:** Boscos perennifolis (de fulla dura), dominats per l'alzinar i les pinedes de pi blanc.")
+
+    st.subheader("🌋 Regió Macaronèsica")
+    st.markdown("Correspon a les Illes Canàries.")
+    st.markdown("- **Clima:** Molt divers i complex per l'altitud i la influència dels vents alisis.\n- **Vegetació:** Gran riquesa i endemismes. Destaca el bosc de laurisilva (un fòssil vivent) i les pinedes de pi canari.")
+    st.divider()
+
+    st.header("Eines de Classificació i Protecció d'Hàbitats")
+    
+    st.subheader("🇪🇺 El projecte CORINE Biotopes")
+    st.info("És una iniciativa de la Unió Europea per **inventariar i catalogar tots els hàbitats** naturals i seminaturals del continent. Utilitza un sistema de codis numèrics jeràrquics i serveix de base per a les polítiques de conservació.")
+
+    st.subheader("🐦 La Xarxa Natura 2000")
+    st.info("És la principal eina de protecció de la biodiversitat de la UE. Està formada per una xarxa d'espais protegits i es basa en dues directives clau:\n- **Directiva Ocells (ZEPA):** Zones d'Especial Protecció per a les Aus.\n- **Directiva Hàbitats (ZEC):** Zones Especials de Conservació per a la resta d'hàbitats i espècies.")
+
+# 🏞️ HÀBITATS DE CATALUNYA
+elif pagina == "🏞️ Hàbitats de Catalunya":
+    st.title("🏞️ Hàbitats de Catalunya")
+    st.markdown("Un recorregut pels boscos més emblemàtics del nostre territori, des del Pirineu fins a la costa.")
+    st.divider()
+
+    st.header("Boscos Representatius")
+
+    # La Fageda
+    st.subheader("🌳 La Fageda (Bosc de Faigs - *Fagus sylvatica*)")
+    st.markdown("Es troba a les àrees muntanyoses humides del nord-est (Montseny, Garrotxa) i al Pirineu.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("#### 🌿 Flora Típica")
+        st.markdown("- **Arbres:** Faig (*Fagus sylvatica*), Avet (*Abies alba*).\n- **Arbusts:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*).")
+    with col2:
+        st.markdown("#### 🐾 Fauna Típica")
+        st.markdown("- **Amfibis:** Salamandra.\n- **Ocells:** Picot garser gros.\n- **Mamífers:** Esquirol, Guineu.")
+    st.divider()
+
+    # L'Alzinar
+    st.subheader("🌲 L'Alzinar (Bosc d'Alzina - *Quercus ilex*)")
+    st.markdown("És el bosc mediterrani per excel·lència. Ocupa grans extensions de terra baixa i muntanya mitjana.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("#### 🌿 Flora Típica")
+        st.markdown("- **Arbres:** Alzina (*Quercus ilex*).\n- **Arbusts:** Marfull (*Viburnum tinus*), Arboç (*Arbutus unedo*).\n- **Lianes:** Arítjol (*Smilax aspera*).")
+    with col2:
+        st.markdown("#### 🐾 Fauna Típica")
+        st.markdown("- **Ocells:** Gamarús.\n- **Mamífers:** Porc senglar, Geneta.")
+    st.divider()
+    
+    # Pineda de Pi Negre
+    st.subheader("🌲 Pineda de Pi Negre (*Pinus uncinata*)")
+    st.markdown("Forma el límit superior del bosc a l'alta muntanya pirinenca (bosc subalpí).")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("#### 🌿 Flora Típica")
+        st.markdown("- **Arbres:** Pi negre (*Pinus uncinata*).\n- **Arbusts:** Nabiu (*Vaccinium myrtillus*), Neret (*Rhododendron ferrugineum*).")
+    with col2:
+        st.markdown("#### 🐾 Fauna Típica")
+        st.markdown("- **Ocells:** Picot negre, Trencapinyes.\n- **Mamífers:** Isard, Ós bru.")
+    st.divider()
+
+    # Pineda de Pi Roig
+    st.subheader("🌲 Pineda de Pi Roig (*Pinus sylvestris*)")
+    st.markdown("Bosc de muntanya mitjana, molt estès al Prepirineu, Pirineu i zones interiors.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("#### 🌿 Flora Típica")
+        st.markdown("- **Arbres:** Pi roig (*Pinus sylvestris*).\n- **Arbusts:** Boixerola (*Arctostaphylos uva-ursi*), Boix.")
+    with col2:
+        st.markdown("#### 🐾 Fauna Típica")
+        st.markdown("- **Ocells:** Astor, Picot negre.\n- **Mamífers:** Esquirol, Cérvol, Cabirol.")
+
+# 🧬 CONCEPTES ESSENCIALS
 elif pagina == "🧬 Conceptes Essencials":
-    st.title("🧬 Conceptes Essencials: El teu Diccionari de Naturalista")
-    st.markdown("Domina aquests termes i parlaràs el llenguatge de l'ecologia.")
+    st.title("🧬 Conceptes Essencials")
+    st.markdown("El vocabulari que tot estudiant del medi natural ha de dominar.")
+    st.divider()
 
-    with st.expander("🌍 **Biodiversitat**: La riquesa de la vida"):
-        st.markdown("És la **varietat d'éssers vius** a la Terra. Inclou 3 nivells:\n1.  **Genètica:** La varietat dins d'una mateixa espècie.\n2.  **Específica:** El nombre d'espècies diferents.\n3.  **Ecològica:** La varietat d'ecosistemes.")
-        # <<< POSA EL TEU DIBUIX AQUÍ
-        st.image("https://cdni.iconscout.com/illustration/premium/thumb/biodiversity-3995801-3306162.png", width=300)
+    st.header("Conceptes de Diversitat i Distribució")
 
-    with st.expander("📍 **Endemisme**: Tresors locals"):
-        st.markdown("Un **endemisme** és una espècie que viu **exclusivament en una regió geogràfica concreta** del món i enlloc més. Solen aparèixer en llocs aïllats com illes o muntanyes.")
-        # <<< POSA EL TEU DIBUIX AQUÍ
-        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Galemys_pyrenaicus.png/800px-Galemys_pyrenaicus.png", caption="El Desman dels Pirineus, un endemisme.")
-        
-    with st.expander("🔥 **Hotspot**: Punts calents de biodiversitat"):
-        st.markdown("Són regions amb una **concentració altíssima d'endemismes** que, alhora, estan **greument amenaçades** per l'activitat humana. La Conca Mediterrània n'és un.")
+    st.subheader("🌍 Què és la Biodiversitat?")
+    st.success("Segons el Conveni Internacional de la Diversitat Biològica (Rio 1992), és l'**àmplia varietat d'éssers vius sobre la Terra**. Comprèn 3 nivells:\n1.  **Diversitat Genètica:** Varietat de gens dins i entre espècies.\n2.  **Diversitat Específica:** Nombre total d'espècies en una regió.\n3.  **Diversitat Ecològica:** Varietat d'hàbitats i ecosistemes.")
+    
+    st.subheader("📍 Què és un Endemisme?")
+    st.success("És una espècie que té una àrea de distribució natural **molt limitada** a una regió geogràfica concreta i no es troba de forma natural enlloc més del món. **Exemple:** El *Desman dels Pirineus*.")
+    
+    st.subheader("🔥 Què són els 'Hotspots' (Punts Calents)?")
+    st.success("Són llocs del planeta amb una **concentració excepcionalment alta d'endemismes**, però que alhora estan **molt amenaçats** per l'activitat humana. La Conca Mediterrània és un dels 34 'hotspots' mundials.")
+    st.divider()
+    
+    st.header("Adaptacions de la Flora")
+    st.markdown("Estratègies desenvolupades per les plantes per sobreviure en condicions adverses.")
+    
+    st.subheader("🥵 Adaptacions a la SEQUERA (Plantes Xeròfiles)")
+    st.info("- **Fulles petites o transformades en espines:** Per reduir la pèrdua d'aigua per transpiració (pins, cactus).\n- **Acumulació d'aigua:** En teixits suculents (plantes crasses).\n- **Pèls i ceres:** Per reflectir la llum i crear una capa aïllant (olivera).\n- **Arrels profundes:** Per buscar aigua a capes més profundes.")
+    
+    st.subheader("🔥 Adaptacions als INCENDIS (Plantes Piròfites)")
+    st.info("- **Rebrotada ràpida:** Capacitat de rebrotar des de la base o l'arrel després del foc (alzina).\n- **Germinació post-foc:** Llavors que necessiten la calor per germinar. El cas més famós són les **pinyes seròtines** del pi blanc (*Pinus halepensis*), que només s'obren amb la calor d'un incendi.")
 
-    with st.expander("🌱 **Adaptacions de la Flora**: L'enginy de les plantes"):
-        st.markdown("Com que no es poden moure, les plantes han desenvolupat estratègies sorprenents per sobreviure:")
-        st.info("🌿 **Plantes Xeròfiles (contra la sequera):** Fulles petites o espines, acumulació d'aigua, pèls protectors.")
-        st.info("🔥 **Plantes Piròfites (contra el foc):** Capacitat de rebrotar, pinyes que s'obren amb la calor (seròtines).")
-        st.info("🥶 **Plantes contra el fred:** Mida petita, saba amb 'anticongelants', pèrdua de la fulla.")
-        
-# 🏆 PÀGINA DEL DESAFIAMENT FINAL
-elif pagina == "🏆 Desafiament Final":
+    st.subheader("🥶 Adaptacions al FRED")
+    st.info("- **Mida petita i creixement arran de terra:** Per aprofitar la calor del sòl i protegir-se del vent.\n- **Pèrdua de la fulla (caducifolis):** Per evitar la congelació i estalviar energia.\n- **Saba espessa:** Concentració de sucres que actua com a 'anticongelant' natural.")
+
+    st.subheader("💡 Adaptacions a la FALTA DE LLUM")
+    st.info("- **Fulles molt grans:** Per captar la màxima llum possible al sotabosc.\n- **Més clorofil·la:** Per optimitzar la fotosíntesi amb poca llum.\n- **Estratègia de trepar (lianes):** Per enfilar-se cap a la llum.")
+
+# 🏆 EXAMEN FINAL
+elif pagina == "🏆 Examen Final":
     run_quiz()
