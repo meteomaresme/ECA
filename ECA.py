@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "8.0.FINAL_REVIEW",
+            "VERSION": "8.1.FLOW_FIXED",
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -144,6 +144,13 @@ st.set_page_config(
 # Injectar l'estil personalitzat
 inject_futuristic_style()
 
+# **CORRECCIÓ CLAU:** Executar la seqüència de boot una sola vegada a l'inici
+if 'system_status' not in st.session_state or st.session_state.system_status == "INITIALIZING":
+    initialize_system()
+    # Aquesta línia només s'executarà un cop si la sessió no està iniciada
+    if st.session_state.system_status == "INITIALIZING":
+        run_boot_sequence()
+
 
 # --- FUNCIÓ PRINCIPAL DEL QUIZ (Mantenim el Quiz per a densitat i funcionalitat) ---
 def run_quiz():
@@ -275,7 +282,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 8.0")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 8.1")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -300,8 +307,6 @@ st.sidebar.info(f"Codi Generat | Versió: {st.session_state.config.get('VERSION'
 # --- Contingut de les Pàgines ---
 
 if pagina == "🏠 Inici & Estat del Sistema":
-    if 'system_status' not in st.session_state or st.session_state.system_status == "INITIALIZING":
-        run_boot_sequence()
     
     st.title("🤖 Terminal de Caracterització d'Hàbitats (UF1)")
     st.markdown("---")
@@ -342,7 +347,7 @@ if pagina == "🏠 Inici & Estat del Sistema":
             * **Xarxa Natura 2000 (NF 1.3):** Xarxa d'àrees de conservació amb **ZEC** (Hàbitats/Espècies) i **ZEPA** (Aus).
             """
         )
-        st.info("EXECUCIÓ OK. Concentració de dades a l'àrea d'informació.")
+        st.info(f"EXECUCIÓ OK. Concentració de dades a l'àrea d'informació. Versió {st.session_state.config.get('VERSION', 'N/A')}")
 
 elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
     st.title("🌍 Cartografia Global: Biomes de la Terra (NF 1.1: A1, A2)")
@@ -416,7 +421,7 @@ elif pagina == "🌲 Classificació dels Biomes Principals":
                 """
                 * **Clima:** Fred extrem amb estius curts i suaus. Precipitació moderada.
                 * **Vegetació:** Boscos d'arbres de **fulla perenne acicular** (en forma d'agulla) i resistents al fred (Pins, Avets).
-                * **Adaptació:** Forma cònica per evitar l'acumulació de neu.
+                * **Adaptació:** Forma cònica per evitar l'acumulació d'acumulació de neu.
                 """
             )
             
@@ -445,6 +450,9 @@ elif pagina == "📊 Climogrames i Distribució":
 
     with st.expander("Detall Tècnic: Interpretació Visual i Regles Crítiques", expanded=True):
         st.header("Mòdul: Interpretació Visual i Regla de Gaussen")
+        
+        # Inserció de la imatge demanada pel client
+        st.image("https://www.meteorologiaenred.com/wp-content/uploads/2018/06/Climograma.jpg", caption="Exemple de Climograma (Gràfic de Tº i P)")
         
         col_eix1, col_eix2 = st.columns(2)
         
@@ -600,7 +608,7 @@ elif pagina == "🏞️ Hàbitats de Catalunya (Detall Exhaustiu)":
              st.subheader("Definicions d'Estructura")
              st.markdown("- **Prat:** Comunitat dominada per gramínies. Aspecte **compacte i homogeni**.")
              st.markdown("- **Pradell:** Prat de **reduïda extensió** o recobriment escàs.")
-             st.markdown("- **Gramenet/Gespa:** Prats on predominen les gramínies; la gespa és molt atapeïda.")
+             st.markdown("- **Gramenet/Gespa:** Prats en què predominen les gramínies o plantes graminoides; la gespa és molt atapeïda.")
         with herb_col2:
              st.subheader("Tipus de Prats Clau")
              st.markdown("- **Prats Alpins:** Típics de la zona pirinenca, sobre el límit del bosc (NF1.1. Habitats. Classificació Corinne.pptx.pdf, p. 10).")
@@ -682,8 +690,4 @@ elif pagina == "🌱 Adaptacions i Biodiversitat (NF 1.1)":
             )
 
 elif pagina == "❓ Posa't a Prova! (Quiz)":
-    if 'system_status' not in st.session_state or st.session_state.system_status != "ONLINE":
-        st.warning("El mòdul de Test requereix la inicialització completa del sistema.")
-        st.info("Torna a la pàgina '🏠 Inici & Estat del Sistema' per començar la seqüència de boot.")
-    else:
-        run_quiz()
+    run_quiz()
