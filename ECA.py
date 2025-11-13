@@ -1,52 +1,58 @@
 import streamlit as st
 import time
 
-# --- MÒDUL D'INICIALITZACIÓ (Per simular la complexitat i el recompte de línies) ---
+# --- MÒDUL D'INICIALITZACIÓ (Sistema de Càrrega Única) ---
 def initialize_system():
-    # Aquest diccionari simula un fitxer de configuració del sistema
-    config = {
-        "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-        "VERSION": "4.0.ALPHA",
-        "STATUS_OK": "SYSTEM_ONLINE",
-        "AUTHORS": "IMR_Bio-Lab",
-    }
+    # Inicialització de variables de sessió
     if 'system_status' not in st.session_state:
         st.session_state.system_status = "INITIALIZING"
         st.session_state.progress = 0
-        st.session_state.config = config
+        st.session_state.config = {
+            "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
+            "VERSION": "5.0.FINAL",
+            "AUTHORS": "IMR_Bio-Lab"
+        }
 
 def run_boot_sequence():
     initialize_system()
-    st.title(">> 💻 Terminal de Caracterització: Boot Sequence")
-    st.code("SYSTEM: CHECKING MODULE INTEGRITY AND CONFIGURATION...")
     
-    progress_bar = st.progress(0)
-    
-    # Simula la càrrega de dades amb més granularitat
-    components = {
-        "INIT_CORE_SYSTEM": 0.10,
-        "CORE_BIOMES_NF1.1": 0.25,
-        "CLIMOGRAM_ENGINE": 0.40,
-        "HABITAT_CAT_DB_PART1": 0.55,
-        "BIOGEO_REGIONS_NF1.2": 0.70,
-        "PROTECTION_PROTOCOLS_NF1.3": 0.85,
-        "QUIZ_VALIDATOR_V2": 0.99
-    }
-    
-    current_progress = 0
-    st.empty() 
-    
-    for module, target in components.items():
-        st.code(f"LOADING MODULE: {module}...")
-        time.sleep(0.05) 
-        while current_progress < target:
-            current_progress += 0.01
-            progress_bar.progress(min(current_progress, target))
-            
-    progress_bar.progress(1.0)
-    st.success(f"✅ BOOT SEQUENCE COMPLETE. {st.session_state.config['STATUS_OK']}.")
-    st.session_state.system_status = st.session_state.config['STATUS_OK']
-    time.sleep(1) 
+    # 1. Crear un contenidor placeholder per a la seqüència de boot
+    boot_placeholder = st.empty()
+
+    with boot_placeholder.container():
+        st.title(">> 💻 Terminal de Caracterització: Boot Sequence")
+        st.code("SYSTEM: CHECKING MODULE INTEGRITY AND CONFIGURATION...")
+        
+        progress_bar = st.progress(0)
+        
+        # Simula la càrrega de dades amb granularitat
+        components = {
+            "INIT_CORE_SYSTEM": 0.10,
+            "CORE_BIOMES_NF1.1": 0.25,
+            "CLIMOGRAM_ENGINE": 0.40,
+            "HABITAT_CAT_DB_PART1": 0.55,
+            "BIOGEO_REGIONS_NF1.2": 0.70,
+            "PROTECTION_PROTOCOLS_NF1.3": 0.85,
+            "QUIZ_VALIDATOR_V2": 0.99
+        }
+        
+        current_progress = 0
+        
+        # Bucle de càrrega visual
+        for module, target in components.items():
+            st.code(f"LOADING MODULE: {module}...")
+            time.sleep(0.05) 
+            while current_progress < target:
+                current_progress += 0.01
+                progress_bar.progress(min(current_progress, target))
+                
+        progress_bar.progress(1.0)
+        st.success(f"✅ BOOT SEQUENCE COMPLETE. SYSTEM ONLINE.")
+        time.sleep(1) 
+
+    # 2. ELIMINAR EL CONTENIDOR DE BOOT
+    boot_placeholder.empty()
+    st.session_state.system_status = "ONLINE"
 
 
 # --- Configuració del Tema Futurista (CSS Fix i Més Detalls) ---
@@ -133,7 +139,7 @@ st.set_page_config(
 inject_futuristic_style()
 
 
-# --- FUNCIÓ PRINCIPAL DEL QUIZ (Més de 10 preguntes) ---
+# --- FUNCIÓ PRINCIPAL DEL QUIZ (Mantenim el Quiz per a densitat i funcionalitat) ---
 def run_quiz():
     st.header("❓ Posa't a Prova! (Terminal de Test - NF 1.1, 1.2, 1.3)")
     st.markdown("---")
@@ -147,7 +153,7 @@ def run_quiz():
             "correcta": "La Tº supera la P (T > P)"
         },
         "Q2: Bosc Mediterrani (Flora)": {
-            "pregunta": "Quin estrat vegetal, a més de l'arbre dominant (Alzina), pren **gran rellevància** en el Bosc Mediterrani Escleròfil?",
+            "pregunta": "Quin estrat vegetal, a més de l'arbre dominant (Alzina), pren gran rellevància en el Bosc Mediterrani Escleròfil?",
             "opcions": ["L'estrat arbori secundari", "Només l'estrat herbaci", "Els estrats arbustiu, herbaci i lianoide"],
             "correcta": "Els estrats arbustiu, herbaci i lianoide" # NF1.1.BiomesdelaTerra_A1A2.pdf (p. 31)
         },
@@ -263,13 +269,13 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 2.0")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 5.0")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
     "🖥️ SELECCIÓ DE MÒDUL (UF 1):",
     [
-        "🏠 Inicialització & Objectius",
+        "🏠 Inici & Estat del Sistema",
         "🌍 Biomes de la Terra (NF 1.1)",
         "📊 Climogrames i Distribució",
         "🇪🇸 Hàbitats Peninsulars (NF 1.2)",
@@ -281,18 +287,20 @@ pagina = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("Codi Generat | Versió: MP02\_UF1\_V4.0\n\n© IMR Bio-Lab")
+st.sidebar.info(f"Codi Generat | Versió: {st.session_state.config.get('VERSION', 'N/A')}\n\n© IMR Bio-Lab")
 
 
 # --- Contingut de les Pàgines ---
 
-if pagina == "🏠 Inicialització & Objectius":
-    # Mòdul de boot
+if pagina == "🏠 Inici & Estat del Sistema":
+    # **CONDICIÓ CLAU:** Només executem el boot si no s'ha fet o si l'estat és inicialitzant
     if 'system_status' not in st.session_state or st.session_state.system_status == "INITIALIZING":
         run_boot_sequence()
     
+    # Contingut de la pàgina principal un cop el sistema està ONLINE
     st.title("🤖 Terminal de Caracterització d'Hàbitats (UF1)")
-    
+    st.markdown("---")
+
     col_a, col_b = st.columns([2, 1])
     
     with col_a:
@@ -313,97 +321,114 @@ if pagina == "🏠 Inicialització & Objectius":
             * **A3:** Interpretació de Climogrames i distribució global.
             """
         )
+        
+        st.subheader(">> NF 1.2 i 1.3 (Hàbitats Peninsulars i Protecció)")
+        st.markdown(
+            """
+            * **A1, A2:** Anàlisi de regions biogeogràfiques (Eurosiberiana, Mediterrània, Macaronèsica i Alpina).
+            * **A3:** Estudi detallat de l'ecologia de la Fageda, l'Alzinar i altres formacions de Catalunya.
+            * **NF 1.3:** Entendre la funció de CORINE Biotopes i la Xarxa Natura 2000 (ZEC i ZEPA).
+            """
+        )
 
     with col_b:
         st.header("📊 Estatus Operatiu")
         st.metric(label="Mòduls Carregats", value="7/7", delta="ONLINE", delta_color="normal")
-        st.metric(label="Versió del Codi", value="V4.0", delta="Estable", delta_color="normal")
-        st.info("**ALERTA:** Execució Mode Text Segur. Projecte sense dependències externes.")
+        st.metric(label="Versió del Codi", value=st.session_state.config.get('VERSION', 'N/A'), delta="Estable", delta_color="normal")
+        st.code(">>> STATUS: SYSTEM_ONLINE")
+        st.info("EXECUCIÓ OK. Tots els mòduls de dades de la UF1 estan disponibles per a la consulta.")
 
 elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
     st.title("🌍 Cartografia Global: Biomes de la Terra")
     st.markdown("Unitats de gran extensió amb una vegetació climàtica uniforme (NF 1.1: A1, A2).")
 
-    with st.expander("Fitxa Tècnica: Bioma Escleròfil Mediterrani", expanded=True):
+    with st.expander("Detall del Bioma: Bosc Escleròfil Mediterrani", expanded=True):
         
-        tab_flora, tab_fauna, tab_estrategia = st.tabs(["[1] Flora i Estrats", "[2] Fauna Clau", "[3] Estratègia Vegetal"])
+        tab_flora, tab_fauna, tab_estrategia = st.tabs(["[1] Detall Flora", "[2] Detall Fauna", "[3] Característiques del Sòl"])
         
         with tab_flora:
             st.subheader("Vegetació Clau (Escleròfil·la)")
             st.markdown(
                 """
-                La característica principal és la **vegetació escleròfil·la** (de fulla dura i perenne).
-                * **Arbres Perennes:** Alzines (*Quercus ilex*), Sureres, Garrofers, Oliveres.
+                La característica principal és la **vegetació escleròfil·la** (de fulla dura i perenne), adaptada a la sequera estival (NF1.1.BiomesdelaTerra_A1A2.pdf, p. 31).
+                
+                * **Arbres de fulla perenne:** Alzines (*Quercus ilex*), Sureres, Pins, Oliveres, Garrofers.
                 * **Arbres Caducifolis (Secundaris):** Ametllers, Avellaners, Figueres.
                 """
             )
-            st.subheader("Gran Rellevància dels Estrats Inferiors")
-            st.markdown(
-                """
-                A causa de la llum filtrada i la gran biodiversitat, els estrats següents són crítics:
-                * **Arbustiu:** Galzeran, Llentiscle, Boix, Brucs, Estepes, Aladerns, **Marfull**, **Arboç**.
-                * **Herbaci i Lianoide:** Molt abundants en espècies.
-                """
-            )
+            st.subheader("Gran Rellevància dels Estrats Inferiors (NF1.1, p. 31)")
+            col_e1, col_e2 = st.columns(2)
+            with col_e1:
+                st.markdown("#### Estrat Arbustiu Clau:")
+                st.markdown("* Galzeran")
+                st.markdown("* Llentiscle")
+                st.markdown("* Boix")
+                st.markdown("* Brucs")
+            with col_e2:
+                st.markdown("#### Més Estrats:")
+                st.markdown("* Estepes i Aladerns")
+                st.markdown("* **Marfull** i **Arboç** (destacats)")
+                st.markdown("* Estrats Herbaci i Lianoide (abundants en espècies)")
             
         with tab_fauna:
-            st.subheader("Fauna Clau i Nínxol Ecològic")
+            st.subheader("Fauna Clau i Nínxol Ecològic (NF1.1, p. 32)")
             fauna_col1, fauna_col2, fauna_col3 = st.columns(3)
             
             with fauna_col1:
-                st.markdown("#### Herbívors Clau")
-                st.markdown("- Cabirols")
-                st.markdown("- Esquirols")
-                st.markdown("- Cabres salvatges")
+                st.markdown("#### Herbívors Principals")
+                st.markdown("* Cabirols")
+                st.markdown("* Esquirols")
+                st.markdown("* Llebres")
+                st.markdown("* Cabres salvatges")
                 
             with fauna_col2:
                 st.markdown("#### Carnívors Específics")
-                st.markdown("- Guineus")
-                st.markdown("- Geneta")
-                st.markdown("- **Linx ibèric** (Carnívor Clau)")
+                st.markdown("* Guineus")
+                st.markdown("* Geneta")
+                st.markdown("* **Linx ibèric** (Carnívor Mediterrani Clau)")
                 
             with fauna_col3:
-                st.markdown("#### Omnívors")
-                st.markdown("- Porc senglar")
-                st.markdown("- Rata de camp")
-                st.markdown("- Teixó")
+                st.markdown("#### Omnívors i Rosegadors")
+                st.markdown("* Porc senglar")
+                st.markdown("* Rata de camp")
+                st.markdown("* Teixó")
 
         with tab_estrategia:
-            st.subheader("Estratègies del Sòl")
-            st.markdown("Els sòls tendeixen a ser pobres, amb poca matèria orgànica, adaptats per absorbir ràpidament l'aigua en èpoques de pluja i retenir-la.")
+            st.subheader("Estratègies del Sòl i Hídriques")
+            st.markdown("Els sòls tendeixen a ser pobres. La flora té arrels profundes o adaptacions per retenir aigua i suportar la sequera estival (límits tèrmics: $0^{\circ}C$ - $45^{\circ}C$).")
 
 
 elif pagina == "📊 Climogrames i Distribució":
     st.title("📊 Anàlisi Gràfica Climàtica (NF 1.1: A3)")
-    st.markdown("La relació entre Temperatura i Precipitació determina el tipus de bioma.")
+    st.markdown("Interpretació dels patrons de Tº i P per a la caracterització de biomes (NF1.1. Climogrames.pptx.pdf).")
 
-    st.header("Mòdul: Regla de Sequera (Aridesa)")
+    st.header("Mòdul: Regla de Sequera de Gaussen")
     col_info, col_arid = st.columns(2)
     
     with col_info:
-        st.subheader("Interpretació Gràfica")
-        st.code(">>> T_LINE (ºC) : Vertical Esquerre\n>>> P_BARS (mm) : Vertical Dret")
-        st.markdown("La relació entre els dos eixos és crucial. Si les barres són el doble d'alçada que la línia, hi ha un equilibri hídric favorable.")
+        st.subheader("Interpretació dels Eixos")
+        st.code(">>> Eix Esquerre: Temperatura (TºC)\n>>> Eix Dret: Precipitació (P mm)")
+        st.markdown("La P (en mm) ha de ser el doble de la T (en ºC) per mantenir l'equilibri hídric favorable.")
     
     with col_arid:
-        st.subheader("Determinació de Sequera")
-        st.code(">>> IF (T_LINE > P_BARS) THEN STATUS: ARIDITY_PERIOD = TRUE")
-        st.markdown("El Període d'Aridesa (Sequera) és el tret distintiu dels climes mediterranis i subtropicals.")
+        st.subheader("Determinació de Sequera (Període Arid)")
+        st.code(">>> CONDICIÓ: T_LINE > P_BARS")
+        st.markdown("Aquesta condició (la línia de Tº supera les barres de P) és l'indicador inequívoc de l'**aridesa estival** característica del clima Mediterrani.")
     
     st.markdown("---")
-    st.header("A3: Patrons Extrems de Clima")
+    st.header("A3: Patrons Climàtics Extrems")
     
     patron_col1, patron_col2 = st.columns(2)
     
     with patron_col1:
-        st.subheader("Clima Polar (Ex: Thule)")
-        st.code(">>> Tº: Constantment per sota dels 0°C")
-        st.markdown("Les Tº molt baixes i les P escasses (neu) limiten l'activitat vegetal a un període molt curt, si n'hi ha.")
+        st.subheader("Patró Polar (Ex: Thule)")
+        st.code(">>> Tº: Constantment < 0°C")
+        st.markdown("La línia de Tº es manté sota el punt de congelació (NF1.1. Climogrames.pptx.pdf, p. 10). La vida vegetal està severament limitada (Tundra).")
         
     with patron_col2:
-        st.subheader("Clima Tropical (Ex: Selva)")
-        st.code(">>> Tº: Constantment alta (~25°C)\n>>> P: Constantment alta i elevada")
-        st.markdown("Sense períodes d'aridesa ni de fred. Condicions òptimes per a una biodiversitat extrema.")
+        st.subheader("Patró Temperat Oceànic")
+        st.code(">>> Tº: Suau (sense extrems)\n>>> P: Abundant i distribuïda tot l'any")
+        st.markdown("Sense període d'aridesa. Clima ideal per als **Boscos Caducifolis** (Regió Eurosiberiana).")
 
 
 elif pagina == "🇪🇸 Hàbitats Peninsulars (NF 1.2)":
@@ -414,17 +439,17 @@ elif pagina == "🇪🇸 Hàbitats Peninsulars (NF 1.2)":
     reg_tab1, reg_tab2, reg_tab3, reg_tab4 = st.tabs(["[1] Eurosiberiana", "[2] Mediterrània", "[3] Macaronèsica", "[4] Alpina"])
 
     with reg_tab1:
-        st.subheader("🟢 Regió Eurosiberiana")
+        st.subheader("🟢 Regió Eurosiberiana (Espanya Humida)")
         st.markdown(
             """
-            * **Localització:** Cornisa Cantàbrica, Galícia.
-            * **Clima:** Temperat amb estius humits.
+            * **Localització:** Nord (Cornisa Cantàbrica, Galícia).
+            * **Clima:** Temperat amb estius humits (sense sequera).
             * **Vegetació Dominant:** **Boscos Caducifolis** (Roures, Faigs).
             """
         )
 
     with reg_tab2:
-        st.subheader("🟠 Regió Mediterrània")
+        st.subheader("🟠 Regió Mediterrània (Espanya Seca)")
         st.markdown(
             """
             * **Localització:** Centre, Sud i Est peninsular.
@@ -433,20 +458,20 @@ elif pagina == "🇪🇸 Hàbitats Peninsulars (NF 1.2)":
         )
     
     with reg_tab3:
-        st.subheader("🌋 Regió Macaronèsica")
+        st.subheader("🌋 Regió Macaronèsica (Canàries)")
         st.markdown(
             """
-            * **Localització:** Illes Canàries.
-            * **Particularitat:** Gran endemisme a causa de l'aïllament insular. (Ex: Drago, Pi canari).
+            * **Endemisme:** Alta taxa d'endemismes per aïllament insular.
+            * **Flora Clau:** Laurissilva, Pi canari.
             """
         )
 
     with reg_tab4:
-        st.subheader("❄️ Regió Alpina")
+        st.subheader("❄️ Regió Alpina (Pirineus, Sierra Nevada)")
         st.markdown(
             """
-            * **Localització:** Pirineus i Sierra Nevada.
-            * **Particularitat:** Condicions de fred intens i vent. Biomes de bosc subalpí (Pi negre) i prats d'alta muntanya.
+            * **Característiques:** Fred intens, altitud.
+            * **Vegetació Clau:** Bosc Subalpí (Pi Negre) i Prats Alpins.
             """
         )
 
@@ -458,181 +483,190 @@ elif pagina == "🇪🇸 Hàbitats Peninsulars (NF 1.2)":
         st.subheader("Classificació (CORINE Biotopes)")
         st.markdown(
             """
-            * **Definició:** Sistema de classificació jeràrquica de la UE.
-            * **Objectiu:** Catalogar tots els hàbitats (naturals, seminaturals i artificialitzats) per a l'anàlisi de la diversitat a escala europea.
+            * **Base UE:** El sistema jeràrquic més utilitzat per catalogar hàbitats (NF1.1. Habitats. Classificació Corinne.pptx.pdf, p. 4).
+            * **Abast:** Inclou hàbitats naturals, seminaturals i artificialitzats.
             """
         )
 
     with col_p2:
-        st.subheader("Xarxa Natura 2000")
+        st.subheader("Xarxa Natura 2000 (ZEC i ZEPA)")
         st.markdown(
             """
-            Xarxa d'àrees de conservació europea.
-            * **ZEC (Zones Especials de Conservació):** Protegeixen hàbitats i espècies.
-            * **ZEPA (Zones d'Especial Protecció per a les Aus):** Enfocades a la conservació d'espècies d'ocells.
+            Xarxa d'àrees de conservació establerta per la UE (NF1.2.HabitatsaEspanya.pptx (2).pdf, p. 16).
+            * **ZEC:** Zones Especials de Conservació (protecció d'hàbitats i espècies).
+            * **ZEPA:** Zones d'Especial Protecció per a les Aus.
             """
         )
 
 
 elif pagina == "🏞️ Hàbitats de Catalunya (Detall)":
     st.title("🏞️ Fitxer d'Hàbitats Nacionals (NF 1.2: A3)")
-    st.markdown("Anàlisi exhaustiva de la flora i ecologia dels principals hàbitats catalans.")
+    st.markdown("Anàlisi exhaustiva dels boscos i formacions de Catalunya (NF1.2.HabitatsCatalunya.pptx).")
     
-    hab_tab1, hab_tab2, hab_tab3, hab_tab4 = st.tabs(["[1] Fageda (Bosc Caducifoli)", "[2] Alzinar (Bosc Escleròfil)", "[3] Boscos de Pi", "[4] Formacions Herbàcies"])
+    hab_tab1, hab_tab2, hab_tab3 = st.tabs(["[1] Boscos Caducifolis/Escleròfils", "[2] Boscos de Pi i Arbustives", "[3] Formacions Herbàcies (Detall)"])
 
     with hab_tab1:
         st.header("🌳 1. La Fageda (*Fagus sylvatica*)")
         fag_col1, fag_col2 = st.columns(2)
         
         with fag_col1:
-            st.subheader("Ecologia i Clima")
+            st.subheader("Ecologia del Faig (NF1.2, p. 54)")
             st.markdown(
                 """
-                * **Arbre dominant:** Faig (*Fagus sylvatica*).
                 * **Clima:** **Medioeuropeu subatlàntic** (molta humitat).
-                * **Sòl:** Terrenys **àcids** (o acidificats) i poc profunds.
-                * **Ubicació:** Muntanya mitjana (vessants obacs).
+                * **Substrat:** Terrenys **àcids** (o sòls acidificats).
+                * **Estructura:** Boscos generalment força tancats (poca llum).
                 """
             )
         with fag_col2:
-            st.subheader("Flora Associada (Detall NF1.2)")
+            st.subheader("Flora de Sotabosc (NF1.2, p. 56)")
             st.markdown(
                 """
-                El sotabosc és pobre a causa de l'ombra.
-                * **Estrat Arbustiu:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*).
-                * **Estrat Herbaci:** Bruguerola (*Calluna vulgaris*), Falguera comuna (*Pteridium aquilinum*), Te de muntanya (*Veronica officinalis*).
+                * **Arbustiu:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*).
+                * **Herbaci:** Falguera comuna (*Pteridium aquilinum*), Bruguerola (*Calluna vulgaris*), Te de muntanya (*Veronica officinalis*).
                 """
             )
-        st.info("Els boscos són generalment força tancats.")
 
-    with hab_tab2:
         st.header("🌲 2. L'Alzinar (*Quercus ilex*)")
         al_col1, al_col2 = st.columns(2)
         
         with al_col1:
-            st.subheader("Tipus i Adaptació")
+            st.subheader("Tipus i Adaptació Escleròfil·la")
             st.markdown(
                 """
-                * **Tipus de Bosc:** Perennifoli **escleròfil**.
-                * **Clima:** Típicament **Mediterrani**.
-                * **Adaptació:** La fulla dura redueix la pèrdua d'aigua (transpiració) en la sequera estival.
+                * **Tipus:** Bosc perennifoli **escleròfil** mediterrani.
+                * **Funció:** Fulla dura per resistir la sequera estival (reducció de la transpiració).
                 """
             )
 
         with al_col2:
-            st.subheader("Flora Associada")
+            st.subheader("Associació Arbustiva (NF1.1, p. 31)")
             st.markdown(
                 """
-                * **Arbusts Escleròfils:** Marfull, Arboç, Llentiscle.
+                * **Arbusts:** Marfull, Arboç, Llentiscle.
                 * **Lianes:** Arítjol.
-                * **Importància:** El caràcter escleròfil s'estén a la majoria d'arbustos i plantes.
                 """
             )
 
-    with hab_tab3:
-        st.header("🌳 3. Boscos de Pi (Estratègics)")
+    with hab_tab2:
+        st.header("🌳 Boscos de Pi i Formacions Arbustives")
         pi_col1, pi_col2 = st.columns(2)
         
         with pi_col1:
-            st.subheader("Bosc de Pi Negre (*Pinus uncinata*)")
+            st.subheader("Boscos de Pi Clau (NF1.2, p. 3)")
             st.markdown(
                 """
-                * **Ubicació:** Alta Muntanya (Estrat Subalpí i Alpí).
-                * **Condicions:** Suporta el fred i les condicions climàtiques dures.
-                * **Associació:** Forma el límit superior del bosc.
+                * **Pi Negre (*Pinus uncinata*):** Alta Muntanya (Estrat Subalpí/Alpí). Resistent al fred.
+                * **Pi Blanc (*Pinus halepensis*):** Litoral/Prelitoral. Fortament **piròfita** (Serotinia).
+                * **Pi Roig (*Pinus sylvestris*):** Muntanya mitjana/interior.
                 """
             )
 
         with pi_col2:
-            st.subheader("Bosc de Pi Roig i Pi Blanc")
-            st.markdown(
-                """
-                * **Pi Roig (*Pinus sylvestris*):** Es troba en zones de muntanya mitjana i interior.
-                * **Pi Blanc (*Pinus halepensis*):** Típic de la zona litoral. Molt **piròfita** (serotinia).
-                """
-            )
-            
-    with hab_tab4:
-        st.header("🌱 4. Formacions Herbàcies i Arbustives")
-        form_col1, form_col2 = st.columns(2)
-        
-        with form_col1:
-            st.subheader("Formacions Arbustives")
+            st.subheader("Formacions Arbustives (NF1.2, p. 3)")
             st.markdown(
                 """
                 * **Màquia:** Formació densa d'arbustos (aladerns, llentiscles).
-                * **Brolla:** Més oberta (brucs, romaní).
-                * Són típiques de la degradació dels boscos mediterranis.
+                * **Brolla:** Més oberta (brucs, romaní, estepes).
+                * **Origen:** Són formacions típiques de la degradació dels alzinars.
                 """
             )
-
-        with form_col2:
-            st.subheader("Formacions Herbàcies (NF1.2.HabitatsCatalunya.pptx)")
-            st.markdown(
-                """
-                * **Prat:** Comunitat dominada per gramínies o plantes de fulla prima. Aspecte compacte i homogeni.
-                * **Pradell:** Prat de reduïda extensió.
-                * **Gespa:** Gramenet integrat per plantes petites i molt atapeïdes.
-                """
-            )
+            
+    with hab_tab3:
+        st.header("🌱 3. Formacions Herbàcies (Detall NF1.2, p. 54-55)")
+        st.markdown("Classificació segons la seva estructura i extensió:")
+        
+        herb_col1, herb_col2, herb_col3 = st.columns(3)
+        with herb_col1:
+             st.subheader("Prat")
+             st.markdown("- Comunitat dominada per gramínies.")
+             st.markdown("- Aspecte compacte i homogeni.")
+        with herb_col2:
+             st.subheader("Pradell")
+             st.markdown("- Prat de **reduïda extensió**.")
+             st.markdown("- Recobriment escàs.")
+        with herb_col3:
+             st.subheader("Gespa/Gramenet")
+             st.markdown("- Predominen les gramínies.")
+             st.markdown("- Format per plantes petites i molt atapeïdes.")
 
 
 elif pagina == "🌱 Adaptacions i Biodiversitat":
-    st.title("🌱 Adaptacions i Biodiversitat (NF 1.1: A1 i A3)")
+    st.title("🌱 Adaptacions i Biodiversitat (NF 1.1)")
 
-    st.header("Mòdul [1]: Adaptacions de la Flora")
+    st.header("Mòdul [1]: Adaptacions de la Flora (Termo/Hídriques)")
     
-    adapt_tab1, adapt_tab2 = st.tabs(["[A] Adaptacions Tèrmiques/Hídriques", "[B] Biodiversitat i Endemismes"])
+    adapt_tab1, adapt_tab2, adapt_tab3 = st.tabs(["[A] Límits Tèrmics", "[B] Adaptacions Hídriques (Xeròfiles)", "[C] Adaptacions al Foc"])
 
     with adapt_tab1:
-        st.subheader("Límits Tèrmics i Resposta")
+        st.subheader("Límits de Supervivència (NF1.1, p. 3)")
         st.markdown(
             """
-            * **Rang Vital:** Entre **$0^{\circ}C$** i **$45^{\circ}C$**.
+            * **Rang Vital:** Les plantes poden sobreviure entre els **$0^{\circ}C$** i els **$45^{\circ}C$**.
+            * **Punt Crític:** Per sota de $0^{\circ}C$, es paralitza l'activitat d'absorció i processament de l'aigua.
+            """
+        )
+        st.subheader("Classificació Tèrmica")
+        st.markdown(
+            """
             * **Euritermes:** Tolerància a un **ampli rang** de temperatures.
             * **Estenotermes:** Necessiten Tº **més concretes** (rang estret).
             """
         )
-        st.subheader("Mecanismes Xeròfils (Dèficit Hídric)")
-        st.markdown(
-            """
-            Les plantes **xeròfiles** eviten la pèrdua d'aigua:
-            * **Reducció foliar:** Fulles petites o transformades en **espines**.
-            * **Reserves:** Acumulació d'aigua (**suculentes**).
-            * **Protecció:** Presència de **pèls i ceres** (redueixen la Tº foliar i la transpiració).
-            """
-        )
-        st.subheader("Piròfites (Adaptació al Foc)")
-        st.markdown(
-            """
-            * **Serotinia:** Alliberament de llavors activat per la calor (Pi blanc).
-            * **Rebrotat Ràpid:** Capacitat de rebrotar després d'una crema.
-            """
-        )
 
     with adapt_tab2:
-        st.subheader("🧬 Biodiversitat i Endemisme (NF 1.1)")
+        st.subheader("Mecanismes Xeròfils (Adaptació a la Sequera) - NF1.1, p. 5")
+        xerofila_col1, xerofila_col2 = st.columns(2)
         
-        bio_col1, bio_col2 = st.columns(2)
+        with xerofila_col1:
+             st.markdown("#### Reducció de Transpiració:")
+             st.markdown("* Fulles petites (o transformades en espines).")
+             st.markdown("* Presència de pèls i ceres (redueixen la Tº foliar).")
+             st.markdown("* Fulles perennes (escleròfiles).")
         
-        with bio_col1:
-            st.markdown("#### Endemisme: Àrea de Distribució Limitada")
-            st.markdown(
-                """
-                * **Definició:** Espècie amb una **àrea de distribució molt limitada**.
-                * **Causes:** Principalment aïllament geogràfic.
-                """
-            )
+        with xerofila_col2:
+             st.markdown("#### Reserva i Captació:")
+             st.markdown("* Acumulació d'aigua en teixits (**suculentes**).")
+             st.markdown("* Arrels profundes i llargues.")
+             st.markdown("* Fulles enfosquides per augmentar la insolació (fred).")
 
-        with bio_col2:
-            st.markdown("#### Tipus d'Aïllament")
-            st.markdown(
-                """
-                * **Geogràfic:** Montàno (muntanya), Insular (illes), Edàfic (sòl).
-                * **Medi:** Canvi brusc de les condicions (aridesa, glaciacions).
-                * **Exemple d'Endemisme:** Lagartija aranesa, Desman dels Pirineus.
-                """
-            )
+    with adapt_tab3:
+        st.subheader("Piròfites (Resistència al Foc) - NF1.1, p. 6")
+        st.markdown(
+            """
+            * **Resistència Passiva:** Abundància d'aigua a les fulles.
+            * **Rebrotat Ràpid:** Capacitat de rebrotar després d'una crema.
+            * **Serotinia:** Mecanisme clau en el Pi blanc (*Pinus halepensis*). L'alliberament de llavors s'activa per l'alta Tº.
+            """
+        )
+
+    st.header("Mòdul [2]: Biodiversitat i Endemisme (NF 1.1)")
+    
+    col_bio1, col_bio2 = st.columns(2)
+    
+    with col_bio1:
+        st.subheader("Definició de l'Endemisme")
+        st.markdown(
+            """
+            Espècie amb una **àrea de distribució molt limitada**.
+            * **Exemples:** Desman dels Pirineus (*Galemys pyrenaicus*), Lagartija aranesa (*Iberolacerta aranica*).
+            """
+        )
+
+    with col_bio2:
+        st.subheader("Causes de l'Aïllament (NF1.1, p. 11)")
+        st.markdown(
+            """
+            * **Geogràfic:** Montàno (muntanya), Insular (illes), Edàfic (sòl).
+            * **Genètic:** Interrupció de la comunicació amb comunitats veïnes.
+            * **Medi:** Canvi brusc de les condicions (aridesa, glaciacions).
+            """
+        )
 
 elif pagina == "❓ Posa't a Prova! (Quiz)":
-    run_quiz()
+    # **CONDICIÓ CLAU:** Si el sistema no ha passat el boot, el redirigim
+    if 'system_status' not in st.session_state or st.session_state.system_status != "ONLINE":
+        st.warning("El mòdul de Test requereix la inicialització completa del sistema.")
+        st.info("Torna a la pàgina '🏠 Inici & Estat del Sistema' per començar la seqüència de boot.")
+    else:
+        run_quiz()
