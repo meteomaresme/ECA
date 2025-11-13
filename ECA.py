@@ -58,7 +58,7 @@ def run_quiz():
         elif percentatge >= 0.7:
             st.info("✅ **NOTABLE!** Molt bon resultat. Tens els conceptes clars.")
         elif percentatge >= 0.5:
-            st.warning(" aprobar **APROVAT.** Has superat l'examen, però revisa els errors per consolidar coneixements.")
+            st.warning("👍 **APROVAT.** Has superat l'examen, però revisa els errors per consolidar coneixements.")
         else:
             st.error("❌ **NECESSITA MILLORAR.** Repassa els capítols on has fallat. No et rendeixis!")
 
@@ -141,7 +141,7 @@ elif pagina == "🌍 Biomes del Món":
     with col1:
         st.markdown("- **Clima:** Semiàrid amb gran amplitud tèrmica (estius calorosos, hiverns freds).\n- **Flora:** Domini absolut de les herbes (gramínies). Els arbres són escassos, limitats a les ribes dels rius.\n- **Fauna:** Grans mamífers herbívors com bisons, antílops i cavalls salvatges.")
     with col2:
-        st.info("🧠 **Dada Clau:** Els sòls de les praderies són extremadament fèrtils, motiu pel qual moltes d'aquestes àrees s'han convertit en les principals zones agrícoles del món (el "graner del món").")
+        st.info("🧠 **Dada Clau:** Els sòls de les praderies són extremadament fèrtils, motiu pel qual moltes d'aquestes àrees s'han convertit en les principals zones agrícoles del món (el \\\"graner del món\\\").")
     st.divider()
 
     # Bosc Mediterrani
@@ -178,7 +178,7 @@ elif pagina == "📊 Anàlisi Climàtica":
     # Mediterrani
     st.subheader("📉 Climograma Mediterrani (Nàpols, Itàlia)")
     st.image("https://i.imgur.com/1Gv2F1B.png", caption="Climograma de Nàpols.")
-    st.success("**Anàlisi:** Hiverns suaus i plujosos. Estius calorosos i molt secs, amb un clar període d'aridesa on la línia de temperatura supera les precipitacions. Aquesta "depressió" estival de la pluja és la seva característica principal.")
+    st.success("**Anàlisi:** Hiverns suaus i plujosos. Estius calorosos i molt secs, amb un clar període d'aridesa on la línia de temperatura supera les precipitacions. Aquesta \"depressió\" estival de la pluja és la seva característica principal.")
     
     # Desèrtic
     st.subheader("🏜️ Climograma Desèrtic (Alexandria, Egipte)")
