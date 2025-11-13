@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "7.2.CONCISE_CLIMOGRAM",
+            "VERSION": "7.3.MAX_BIOME_COVERAGE",
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -266,7 +266,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 7.2")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 7.3")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -274,6 +274,7 @@ pagina = st.sidebar.radio(
     [
         "🏠 Inici & Estat del Sistema",
         "🌍 Biomes de la Terra (NF 1.1)",
+        "🌲 Classificació dels Biomes Principals",
         "📊 Climogrames i Distribució",
         "🇪🇸 Hàbitats Peninsulars (NF 1.2)",
         "🏞️ Hàbitats de Catalunya (Detall)",
@@ -367,20 +368,19 @@ elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
             
             with fauna_col1:
                 st.markdown("#### Herbívors Específics")
-                st.markdown("* Cabirols, Esquirols (altres mamífers).")
-                st.markdown("* Llebres, Cabres salvatges (en zones més muntanyoses i de difícil accés).")
+                st.markdown("* Cabirols, Esquirols, Llebres.")
+                st.markdown("* Cabres salvatges (en zones més muntanyoses).")
                 
             with fauna_col2:
                 st.markdown("#### Carnívors Clau")
                 st.markdown("* Guineus (generalitzats).")
-                st.markdown("* Geneta (carnívor nocturn, important en el control de rosegadors).")
-                st.markdown("* **Linx Ibèric** (el carnívor més representatiu i amenaçat del bioma mediterrani).")
+                st.markdown("* Geneta (carnívor nocturn).")
+                st.markdown("* **Linx Ibèric** (el carnívor més representatiu i amenaçat).")
                 
             with fauna_col3:
                 st.markdown("#### Omnívors i Rosegadors")
-                st.markdown("* Porc senglar (amb gran impacte al sotabosc).")
-                st.markdown("* Rata de camp.")
-                st.markdown("* Teixó.")
+                st.markdown("* Porc senglar (alt impacte al sotabosc).")
+                st.markdown("* Rata de camp, Teixó.")
 
         with tab_estrategia:
             st.subheader("Clima i Sòl (Determinants del Bioma)")
@@ -393,6 +393,54 @@ elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
                 """
             )
             st.code(">>> REQUISIT: Fulla dura i perenne = Adaptació a l'estrès hídric.")
+
+elif pagina == "🌲 Classificació dels Biomes Principals":
+    st.title("🌲 Classificació dels Biomes Principals (NF 1.1: A2)")
+    st.markdown("Anàlisi comparativa dels principals biomes segons les seves característiques de clima i vegetació.")
+
+    with st.expander("Fitxa Tècnica: Biomes de Latituds Altes i Deserts", expanded=True):
+        
+        bio_col1, bio_col2 = st.columns(2)
+        
+        with bio_col1:
+            st.subheader("1. Tundra (Bioma Frèd Extrem)")
+            st.markdown(
+                """
+                * **Localització:** Zones Polars i Subpolars.
+                * **Clima:** Tº mitjanes baixíssimes; gran part de l'any sota $0^{\circ}C$. Poca precipitació (neu).
+                * **Vegetació:** Prats i landes. Predomini de molses, líquens i arbusts nans. **Sense arbres**.
+                * **Sòl Clau:** **Permafrost** (sòl permanentment congelat).
+                """
+            )
+            st.subheader("3. Bosc de Coníferes o Taiga (Bioma Boreal)")
+            st.markdown(
+                """
+                * **Localització:** Latituds altes (Sibèria, Canadà).
+                * **Clima:** Fred extrem amb estius curts i suaus. Precipitació moderada.
+                * **Vegetació:** Boscos d'arbres de **fulla perenne acicular** (en forma d'agulla) i resistents al fred (Pins, Avets).
+                * **Adaptació:** Forma cònica per evitar l'acumulació de neu.
+                """
+            )
+            
+        with bio_col2:
+            st.subheader("2. Desert (Bioma Amb Dèficit Hídric Extrem)")
+            st.markdown(
+                """
+                * **Localització:** Zones interiors o a prop dels tròpics.
+                * **Clima:** Molt poca precipitació (sovint $< 250$ mm/any). Gran oscil·lació tèrmica diària (calor dia / fred nit).
+                * **Vegetació:** Escassa i molt adaptada (xeròfites, suculentes com els cactus). Fulles transformades en espines.
+                * **Sòl Clau:** Pobre, amb poques substàncies orgàniques.
+                """
+            )
+            st.subheader("4. Selva Tropical (Bioma Humit Càlid)")
+            st.markdown(
+                """
+                * **Localització:** Zona Equatorial.
+                * **Clima:** Tº mitjanes altes i constants. Precipitació molt alta i constant. **Sense estació seca**.
+                * **Vegetació:** Boscos densos, amb molts estrats i gran diversitat d'espècies (**alta biodiversitat**). Arbres de fulla perenne i ample.
+                * **Sòl Clau:** Freqüentment pobre per l'alt rentat de nutrients (lixiviació).
+                """
+            )
 
 
 elif pagina == "📊 Climogrames i Distribució":
@@ -514,17 +562,17 @@ elif pagina == "🏞️ Hàbitats de Catalunya (Detall)":
             st.subheader("Ecologia del Faig (Medioeuropeu Subatlàntic)")
             st.markdown(
                 """
-                * **Arbre Dominant:** Faig (*Fagus sylvatica*). El bosc és força tancat (poca llum al sotabosc).
+                * **Arbre Dominant:** Faig (*Fagus sylvatica*). Bosc tancat (poca llum).
                 * **Clima:** **Medioeuropeu subatlàntic** (molta humitat).
                 * **Substrat:** Terrenys **àcids** o sòls acidificats (NF1.2.HabitatsaEspanya.pptx (2).pdf, p. 54).
-                * **Ubicació:** Muntanya mitjana, típicament en vessants obacs i inclinats (per evitar l'excessiva insolació).
+                * **Ubicació:** Muntanya mitjana, típicament en vessants obacs i inclinats.
                 """
             )
         with fag_col2:
             st.subheader("Composició Detallada del Sotabosc (Pobre)")
             st.markdown(
                 """
-                El sotabosc és pobre a causa de la manca de llum. Està compost principalment per plantes **acidòfiles** (NF1.2, p. 54).
+                El sotabosc és pobre per manca de llum. Està compost principalment per plantes **acidòfiles** (NF1.2, p. 54).
                 * **Estrat Arbori:** *Fagus sylvatica* (Faig).
                 * **Estrat Arbustiu Clau:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*).
                 * **Estrat Herbaci (Detaill):** Bruguerola (*Calluna vulgaris*), Falguera comuna (*Pteridium aquilinum*), Te de muntanya (*Veronica officinalis*).
@@ -609,7 +657,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat":
             st.markdown(
                 """
                 * **Punt de Congelació (0°C):** Sota aquesta Tº, la planta **paralitza** l'activitat d'absorció i processament de l'aigua.
-                * **Tº Alta (45°C):** Per sobre, l'activitat vegetativa també es paralitza.
+                * **Tº Alta (45°C):** Per sobre, l'activitat vegetativa de la planta també es paralitza.
                 * **Classificació:** **Euritermes** (ample rang de Tº) vs. **Estenotermes** (necessiten Tº més concretes).
                 """
             )
@@ -635,7 +683,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat":
             col_ad1, col_ad2 = st.columns(2)
             with col_ad1:
                 st.markdown("#### Adaptacions al Fred:")
-                st.markdown("* **Morfologia:** Plantes petites i prop del terra (millor aprofitament de la calor del sòl).")
+                st.markdown("* **Morfologia:** Plantes petites i prop del terra.")
                 st.markdown("* **Fisiologia:** Saba més espessa (ralentir la congelació).")
                 st.markdown("* **Fenologia:** Manteniment latent a l'hivern (ex: *Betula Pendula*).")
             with col_ad2:
@@ -655,7 +703,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat":
             st.subheader("Causes d'Aïllament Comunes (NF1.1, p. 11):")
             st.markdown(
                 """
-                1.  **Aïllament Geogràfic:** Més freqüent. Pot ser **Montàno** (muntanya), **Insular** (illes), **Edàfic** (sòl) o **Desèrtic**.
+                1.  **Aïllament Geogràfic (Més comú):** Pot ser **Montàno** (muntanya), **Insular** (illes), **Edàfic** (sòl) o **Desèrtic**.
                 2.  **Aïllament Genètic:** Interrupció de la comunicació amb comunitats veïnes.
                 """
             )
