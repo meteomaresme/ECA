@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "7.0.FINAL_DENSITY",
+            "VERSION": "7.2.CONCISE_CLIMOGRAM",
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -266,7 +266,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 7.0")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 7.2")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -295,8 +295,6 @@ if pagina == "🏠 Inici & Estat del Sistema":
     
     st.title("🤖 Terminal de Caracterització d'Hàbitats (UF1)")
     st.markdown("---")
-    
-    # Ús d'una sola columna per maximitzar l'espai textual
     
     st.header("🎯 Matriu d'Objectius (NF 1.1, 1.2, 1.3)")
     st.markdown(
@@ -401,48 +399,28 @@ elif pagina == "📊 Climogrames i Distribució":
     st.title("📊 Anàlisi Gràfica Climàtica (NF 1.1: A3)")
     st.markdown("Eina essencial per caracteritzar un bioma mitjançant la combinació de Tº i P (NF1.1. Climogrames.pptx.pdf, p. 2).")
 
-    with st.expander("Detall Tècnic: Interpretació i Regles Crítiques", expanded=True):
-        st.header("Mòdul: Regla de Gaussen i Eixos de Lectura")
+    st.subheader("Referència Visual [Climograma]")
+    st.image("https://www.meteorologiaenred.com/wp-content/uploads/2018/06/Climograma.jpg", caption="Exemple visual d'un Climograma. La línia de Tº (vermella/taronja) i les barres de P (blaves).")
+    
+    with st.expander("Detall Tècnic: Interpretació Visual i Regles Crítiques", expanded=True):
+        st.header("Mòdul: Interpretació Visual i Regla de Gaussen")
         
         col_eix1, col_eix2 = st.columns(2)
         
         with col_eix1:
-            st.subheader("Eixos i Variables (NF1.1, p. 2)")
-            st.markdown("* **Eix Horitzontal:** Mesos de l'any (G-D).")
-            st.markdown("* **Eix Vertical Esquerre:** **Temperatura** (Tº en $^\circ C$) - Línia vermella/taronja.")
-            st.markdown("* **Eix Vertical Dret:** **Precipitació** (P en mm) - Barres blaves.")
+            st.subheader("Eixos i Indicadors Clau (NF1.1, p. 2)")
+            st.markdown("* **Línia (Tº):** Eix esquerre. Si és alta, **calor**. Si és baixa, **fred**.")
+            st.markdown("* **Barres (P):** Eix dret. Si són altes, **humitat**. Si són baixes, **sequera**.")
+            st.markdown("* **Regla Gaussen (Sequera):** El dèficit hídric es produeix quan la línia de Tº **supera** les barres de P ($T > P$).")
+            st.code(">>> CONDICIÓ VITAL: P >= 2 x T")
         
         with col_eix2:
-            st.subheader("Relació de Gaussen (Dèficit Hídric)")
-            st.code(">>> CONDICIÓ VITAL: P >= 2 x T")
-            st.markdown("* L'equilibri hídric és favorable quan la precipitació duplica la temperatura ($P \ge 2T$).")
-            st.markdown("* La **Sequera o Aridesa** es dóna quan $T > P$ (la línia de Tº supera les barres de P).")
-            st.markdown("* Aquesta sequera estival és el tret distintiu del clima **Mediterrani**.")
+            st.subheader("Patrons Climàtics (Exemples Ràpids)")
+            st.markdown("* **Patró Mediterrani:** Forta caiguda de les barres (P) a l'estiu i pujada de la línia (Tº). **Sequera estival** evident.")
+            st.markdown("* **Patró Polar (Tundra):** Tota la línia de Tº es manté **sota $0^{\circ}C$** (o molt baixa) i les barres són mínimes.")
+            st.markdown("* **Patró Oceànic (Caducifoli):** La línia de Tº no presenta pics extrems i **les barres de P MAI són superades per la línia de Tº** (sense sequera).")
     
     st.markdown("---")
-    st.header("A3: Patrons Climàtics Globals (NF1.1, p. 10)")
-    
-    patron_col1, patron_col2, patron_col3 = st.columns(3)
-    
-    with patron_col1:
-        st.subheader("Patró Polar (Ex: Thule)")
-        st.code(">>> Tº: Constantment < 0°C")
-        st.markdown("* Les temperatures són **molt baixes** tot l'any.")
-        st.markdown("* Pluges escasses (normalment en forma de neu).")
-        st.markdown("* Condició: Línia de Tº sota els $0^{\circ}C$ tota l'anualitat. Bioma: Tundra.")
-        
-    with patron_col2:
-        st.subheader("Patró Temperat Oceànic")
-        st.code(">>> Tº: Suau (sense extrems)")
-        st.markdown("* No hi ha sequera (es compleix $P \ge 2T$).")
-        st.markdown("* Precipitació abundant i distribuïda tot l'any.")
-        st.markdown("* Clima ideal per als **Boscos Caducifolis** (Regió Eurosiberiana).")
-        
-    with patron_col3:
-        st.subheader("Patró Tropical/Equatorial (Selva)")
-        st.code(">>> Tº: Constantment alta i P: Constantment alta.")
-        st.markdown("* Sense períodes d'aridesa ni de fred (NF1.1. Climogrames.pptx.pdf).")
-        st.markdown("* Aquest clima permet la màxima expressió de la vida i desenvolupament vegetal (Selva Tropical).")
 
 
 elif pagina == "🇪🇸 Hàbitats Peninsulars (NF 1.2)":
@@ -549,7 +527,7 @@ elif pagina == "🏞️ Hàbitats de Catalunya (Detall)":
                 El sotabosc és pobre a causa de la manca de llum. Està compost principalment per plantes **acidòfiles** (NF1.2, p. 54).
                 * **Estrat Arbori:** *Fagus sylvatica* (Faig).
                 * **Estrat Arbustiu Clau:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*).
-                * **Estrat Herbaci (Detaill):** Bruguerola (*Calluna vulgaris*), Falguera comuna (*Pteridium aquilinum*), *Deschampsia flexuosa*, *Calamagrostis arundinacea*, Te de muntanya (*Veronica officinalis*).
+                * **Estrat Herbaci (Detaill):** Bruguerola (*Calluna vulgaris*), Falguera comuna (*Pteridium aquilinum*), Te de muntanya (*Veronica officinalis*).
                 """
             )
 
@@ -609,7 +587,7 @@ elif pagina == "🏞️ Hàbitats de Catalunya (Detall)":
              st.subheader("Definicions Específiques")
              st.markdown("- **Prat:** Comunitat dominada per gramínies. Aspecte compacte i homogeni.")
              st.markdown("- **Pradell:** Prat de **reduïda extensió** o recobriment escàs (plantes menudes).")
-             st.markdown("- **Gramenet/Gespa:** Prats on predominen les gramínies; la gespa és un gramenet format per plantes petites i molt atapeïdes.")
+             st.markdown("- **Gramenet/Gespa:** Prats en què predominen les gramínies; la gespa és un gramenet format per plantes petites i molt atapeïdes.")
         with herb_col2:
              st.subheader("Tipus de Prats Clau")
              st.markdown("- **Prats Alpins:** Típics de la zona pirinenca, sobre el límit del bosc (NF1.1. Habitats. Classificació Corinne.pptx.pdf, p. 10).")
@@ -630,7 +608,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat":
             st.code(">>> RANG VITAL: 0°C a 45°C")
             st.markdown(
                 """
-                * **Punt de Congelació (0°C):** Sota aquesta Tº, la planta **paralitza** l'activitat d'absorció i processament de l'aigua. No pot moure ni gestionar l'aigua.
+                * **Punt de Congelació (0°C):** Sota aquesta Tº, la planta **paralitza** l'activitat d'absorció i processament de l'aigua.
                 * **Tº Alta (45°C):** Per sobre, l'activitat vegetativa també es paralitza.
                 * **Classificació:** **Euritermes** (ample rang de Tº) vs. **Estenotermes** (necessiten Tº més concretes).
                 """
@@ -677,7 +655,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat":
             st.subheader("Causes d'Aïllament Comunes (NF1.1, p. 11):")
             st.markdown(
                 """
-                1.  **Aïllament Geogràfic:** Més freqüent. Pot ser **Montàno** (muntanya, ex: Desman), **Insular** (illes, ex: Canàries), **Edàfic** (sòl) o **Desèrtic**.
+                1.  **Aïllament Geogràfic:** Més freqüent. Pot ser **Montàno** (muntanya), **Insular** (illes), **Edàfic** (sòl) o **Desèrtic**.
                 2.  **Aïllament Genètic:** Interrupció de la comunicació amb comunitats veïnes.
                 """
             )
