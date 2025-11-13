@@ -41,59 +41,79 @@ st.sidebar.markdown("---")
 st.sidebar.info("Creat a partir dels materials de la UF1 del MP02 de Medi Natural.")
 
 
-# --- Funció per al Quiz ---
+# --- Funció per al Quiz (Versió Ampliada i Sense Imatges) ---
 def run_quiz():
-    st.title("❓ Posa't a Prova! (Quiz)")
-    st.markdown("És hora de comprovar què has après. Selecciona la resposta correcta per a cada pregunta.")
+    st.title("❓ Posa't a Prova! (Quiz Ampliat)")
+    st.markdown("És hora de comprovar què has après. Selecciona la resposta correcta per a cada pregunta. Aquest quiz cobreix Biomes, Climogrames, Adaptacions, Hàbitats i Protecció.")
 
-    # Diccionari amb les preguntes i respostes
+    # Diccionari amb les preguntes i respostes, extretes dels materials (NF1.1 i NF1.2)
     preguntes = {
-        "Pregunta 1": {
+        "Pregunta 1 (Climograma)": {
             "pregunta": "Si un climograma mostra barres de precipitació molt baixes a l'estiu i una línia de temperatura alta, de quin clima és típic?",
             "opcions": ["Polar", "Mediterrani", "Equatorial", "Oceànic"],
             "correcta": "Mediterrani"
         },
-        "Pregunta 2": {
-            "pregunta": "Quin bioma es caracteritza per arbres que perden la fulla a l'hivern, com els roures i els faigs?",
+        "Pregunta 2 (Bioma)": {
+            "pregunta": "Quin bioma es caracteritza per arbres que perden la fulla a l'hivern (caducifolis), com els roures i els faigs?",
             "opcions": ["Tundra", "Desert", "Bosc temperat caducifoli", "Selva tropical"],
             "correcta": "Bosc temperat caducifoli"
         },
-        "Pregunta 3": {
+        "Pregunta 3 (Adaptació de Flora)": {
             "pregunta": "Les plantes amb fulles petites, pèls o que acumulen aigua (suculentes) s'anomenen xeròfiles i estan adaptades a...",
             "opcions": ["La falta de llum", "El fred intens", "La sequera", "Els incendis"],
             "correcta": "La sequera"
         },
-        "Pregunta 4": {
+        "Pregunta 4 (Biodiversitat)": {
             "pregunta": "Una espècie que només es troba en una regió geogràfica molt concreta (com la *Lagartija aranesa* als Pirineus) s'anomena...",
             "opcions": ["Endemisme", "Hotspot", "Bioma", "Espècie invasora"],
             "correcta": "Endemisme"
         },
-        "Pregunta 5": {
-            "pregunta": "Quin és l'arbre dominant en una 'fageda'?",
+        "Pregunta 5 (Hàbitats Catalunya)": {
+            "pregunta": "Quin és l'arbre dominant i que dona nom a una 'fageda'?",
             "opcions": ["El pi (Pinus)", "L'alzina (Quercus ilex)", "El faig (Fagus sylvatica)", "El roure (Quercus robur)"],
             "correcta": "El faig (Fagus sylvatica)"
         },
-         "Pregunta 6": {
-            "pregunta": "Quina classificació europea s'utilitza per catalogar els hàbitats naturals i seminaturals?",
-            "opcions": ["WWF", "Natura 2000", "CORINE Biotopes", "Whittaker"],
+        "Pregunta 6 (Protecció d'Hàbitats)": {
+            "pregunta": "Quin sistema de classificació europeu s'utilitza per catalogar els hàbitats naturals i seminaturals, i que és la base per a la Xarxa Natura 2000?",
+            "opcions": ["WWF", "Ramsar", "CORINE Biotopes", "Whittaker"],
             "correcta": "CORINE Biotopes"
+        },
+        "Pregunta 7 (Bioma Escleròfil)": {
+            "pregunta": "Quin d'aquests animals és un carnívor típic esmentat de la fauna del Bosc Mediterrani (Escleròfil)?",
+            "opcions": ["Cabirol", "Rata de camp", "Linx ibèric", "Esquirol"],
+            "correcta": "Linx ibèric"
+        },
+        "Pregunta 8 (Clima)": {
+            "pregunta": "Per sota de quina temperatura la planta no té opcions d'absorbir aigua, eliminar-la o processar-la eficaçment, segons els materials d'adaptacions?",
+            "opcions": ["$10^{\circ}C$", "$45^{\circ}C$", "$0^{\circ}C$", "$-5^{\circ}C$"],
+            "correcta": "$0^{\circ}C$"
+        },
+        "Pregunta 9 (Hàbitats Espanya)": {
+            "pregunta": "Quina de les grans regions biogeogràfiques d'Espanya es caracteritza per boscos caducifolis (roures i faigs) i estius humits?",
+            "opcions": ["Regió Macaronèsica", "Regió Eurosiberiana", "Regió Mediterrània", "Regió Alpina"],
+            "correcta": "Regió Eurosiberiana"
+        },
+        "Pregunta 10 (Hàbitats Catalunya)": {
+            "pregunta": "En l'Alzinar, els arbustos com el Marfull i l'Arboç són exemples de la vegetació perenne adaptada al clima...",
+            "opcions": ["Polar", "Atlàntic", "Mediterrani", "Continental"],
+            "correcta": "Mediterrani"
         }
     }
 
     # Inicialitzar un lloc per desar les respostes de l'usuari
     respostes_usuari = {}
 
-    with st.form(key="quiz_form"):
+    with st.form(key="quiz_form_ampliat"):
         for i, (key, value) in enumerate(preguntes.items()):
-            st.subheader(f"{key}: {value['pregunta']}")
+            st.subheader(f"Pregunta {i+1}: {value['pregunta']}")
             respostes_usuari[key] = st.radio(
                 "Selecciona la teva resposta:",
                 options=value["opcions"],
-                key=f"q{i}",
+                key=f"q_amp{i}",
                 label_visibility="collapsed"
             )
             st.markdown("---")
-        
+            
         submitted = st.form_submit_button("Envia Respostes 🚀")
 
     if submitted:
@@ -108,26 +128,26 @@ def run_quiz():
             
             if resposta_usuari == resposta_correcta:
                 score += 1
-                st.success(f"**{key}:** Correcte! ✔️\n*La teva resposta: {resposta_usuari}*")
+                st.success(f"**{key.split('(')[0].strip()}:** Correcte! ✔️ (Resposta: {resposta_usuari})")
             else:
-                st.error(f"**{key}:** Incorrecte. ❌\n*La teva resposta: {resposta_usuari}*\n*Resposta correcta: {resposta_correcta}*")
+                st.error(f"**{key.split('(')[0].strip()}:** Incorrecte. ❌ (La teva resposta: {resposta_usuari}. Correcta: {resposta_correcta})")
         
         st.markdown("---")
-        st.subheader(f"La teva puntuació final és: {score}/{total_preguntes}")
+        st.subheader(f"La teva puntuació final és: **{score}/{total_preguntes}**")
         
         percentatge = (score / total_preguntes)
         
+        st.progress(percentatge)
+
         if percentatge == 1.0:
             st.balloons()
-            # Recorda afegir aquesta imatge a la carpeta 'img' i treure el '#'
-            # st.image("img/celebracio.gif", caption="Espectacular! Ho saps tot!") 
-            st.success("🎉 **FELICITATS! Puntuació Perfecta!** 🎉")
+            st.success("🎉 **FELICITATS! Puntuació Perfecta!** 🎉 Has demostrat un domini complet dels conceptes de la UF1.")
         elif percentatge >= 0.7:
-            st.success("Molt bona feina! Has dominat la majoria dels conceptes.")
+            st.success("Molt bona feina! Has dominat la majoria dels conceptes. Només un petit repàs i ho tindràs tot perfecte.")
         elif percentatge >= 0.5:
-            st.warning("No està malament, però repassa les seccions on has fallat!")
+            st.warning("Has aprovat, però repassa les seccions on has fallat per consolidar els coneixements.")
         else:
-            st.error("Sembla que necessites repassar una mica més. Torna a explorar les seccions!")
+            st.error("Sembla que necessites repassar una mica més. Torna a explorar les seccions d'Hàbitats i Biomes!")
 
 # --- Contingut de les Pàgines ---
 
@@ -136,7 +156,6 @@ if pagina == "🏠 Inici":
     st.title("🌿 Benvingut/da a l'Explorador d'Hàbitats!")
     st.markdown("Aquesta és la teva eina interactiva per estudiar la **UF1: Caracterització d'hàbitats**. Navega per les diferents seccions utilitzant el menú de l'esquerra.")
     
-    # Recorda afegir una imatge de benvinguda a la teva carpeta 'img' i treure el '#'
     # st.image("img/benvinguda.jpg", caption="Un mosaic de la biodiversitat que estudiarem.") 
 
     st.header("Què trobaràs aquí?")
@@ -177,7 +196,6 @@ elif pagina == "🌍 Biomes de la Terra":
     st.subheader("Classificació de Biomes (Whittaker)")
     st.markdown("Una de les maneres més famoses de classificar els biomes és el diagrama de Whittaker, que relaciona la **temperatura mitjana anual** i la **precipitació anual**.")
     
-    # Recorda afegir el diagrama de Whittaker a 'img/whittaker.png' i treure el '#'
     # st.image("img/whittaker.png", caption="Diagrama de Biomes de Whittaker") 
 
     st.header("Explora alguns Biomes Principals")
