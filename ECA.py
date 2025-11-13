@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "8.1.FLOW_FIXED",
+            "VERSION": "8.2.CLIMOGRAM_DOC", # Nova Versió amb documentació climograma
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -282,7 +282,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 8.1")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 8.2")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -448,32 +448,69 @@ elif pagina == "📊 Climogrames i Distribució":
     st.title("📊 Anàlisi Gràfica Climàtica (NF 1.1: A3)")
     st.markdown("Eina essencial per caracteritzar un bioma mitjançant la combinació de Tº i P (NF1.1. Climogrames.pptx.pdf, p. 2).")
 
-    with st.expander("Detall Tècnic: Interpretació Visual i Regles Crítiques", expanded=True):
+    with st.expander("Detall Tècnic: Interpretació Visual i Regles Crítiques (Ampliat)", expanded=True):
         st.header("Mòdul: Interpretació Visual i Regla de Gaussen")
         
         # Inserció de la imatge demanada pel client
-        st.image("https://www.meteorologiaenred.com/wp-content/uploads/2018/06/Climograma.jpg", caption="Exemple de Climograma (Gràfic de Tº i P)")
+        st.image("https://www.meteorologiaenred.com/wp-content/uploads/2018/06/Climograma.jpg", caption="Exemple de Climograma de Walter i Lieth")
         
-        col_eix1, col_eix2 = st.columns(2)
+        st.subheader("1. ⚙️ Guia de Lectura i Escales (Regla de Gaussen)")
         
-        with col_eix1:
-            st.subheader("Eixos i Indicadors Clau (NF1.1, p. 2)")
+        col_lectura, col_regla = st.columns(2)
+        
+        with col_lectura:
             st.markdown(
                 """
-                * **Línia (Tº):** Eix esquerre.
-                * **Barres (P):** Eix dret.
-                * **Regla Gaussen (Sequera):** La sequera es dóna quan la línia de Tº **supera** les barres de P ($T > P$) (NF1.1. Climogrames.pptx.pdf, p. 6).
+                * **Línia Vermella (Tº):** Representa la **Temperatura mitjana mensual** (Eix vertical esquerre).
+                * **Barres Blaves (P):** Representen la **Precipitació mitjana mensual** (Eix vertical dret).
+                * **Relació Clau:** L'escala utilitza la relació $10^{\circ}C$ s'alinea amb $20$ mm. Aquesta escala doble (P:T, 2:1) és la que permet llegir ràpidament la sequera.
                 """
             )
-            st.code(">>> CONDICIÓ DE SEQUERA: T (ºC) > P (mm)")
-        
-        with col_eix2:
-            st.subheader("Patrons Climàtics (Exemples Ràpids)")
+        with col_regla:
+            st.markdown("#### **Interpretació de la Vida Vegetal:**")
             st.markdown(
                 """
-                * **Patró Mediterrani:** Forta **sequera estival** evident.
-                * **Patró Oceànic (Caducifoli):** Les barres de P **MAI són superades** per la línia de Tº (sense sequera).
-                * **Patró Polar (Tundra):** Tota la línia de Tº es manté **sota $0^{\circ}C$** (o molt baixa) (NF1.1. Climogrames.pptx.pdf, p. 10).
+                * **HUMITAT:** La línia **Blava (P)** es troba **per sobre** de la línia **Vermella (T)**. L'aigua no és limitant.
+                * **SEQUERA (ARIDESA):** La línia **Vermella (T)** es troba **per sobre** de la línia **Blava (P)**. L'aigua és el factor limitant.
+                * **GELADA/FRED:** La línia **Vermella (T)** cau **per sota dels $0^{\circ}C$**. Paralització de l'activitat de la planta.
+                """
+            )
+
+        st.markdown("---")
+        st.subheader("2. 🌍 Escenaris Climàtics Clàssics (Tipus de Clima)")
+        
+        tab_med, tab_oce, tab_pol = st.tabs(["[A] Mediterrani (Escleròfil)", "[B] Oceànic (Caducifoli)", "[C] Polar / Alta Muntanya"])
+        
+        with tab_med:
+            st.markdown("#### **Escenari Mediterrani Típic (Bioma Escleròfil)**")
+            st.code(">>> ZONA DE VEGETACIÓ: Alzinar, Pinar (Xeròfil·la)")
+            st.markdown(
+                """
+                * **Factor Clau:** Forta i clara **sequera estival**.
+                * **Visualització:** La línia vermella (T) puja bruscament i **supera** clarament la línia blava (P) durant els mesos d'estiu (J, L, A).
+                * **Hivern:** Temperat, amb temperatures mitjanes superiors als $5^{\circ}C$ (sense gelades significatives).
+                """
+            )
+        
+        with tab_oce:
+            st.markdown("#### **Escenari Temperat Oceànic (Regió Eurosiberiana)**")
+            st.code(">>> ZONA DE VEGETACIÓ: Bosc Caducifoli (Faig, Roure)")
+            st.markdown(
+                """
+                * **Factor Clau:** **Absència total de sequera estival.**
+                * **Visualització:** La línia blava (P) es manté **sempre** per sobre de la línia vermella (T).
+                * **Hivern:** Fred, però amb precipitació abundant i ben distribuïda.
+                """
+            )
+
+        with tab_pol:
+            st.markdown("#### **Escenari Polar / Alta Muntanya (Clima Alpí)**")
+            st.code(">>> ZONA DE VEGETACIÓ: Tundra, Prats Alpins")
+            st.markdown(
+                """
+                * **Factor Clau:** **Fred extrem** i limitant.
+                * **Visualització:** La línia vermella (T) es troba **per sota o molt a prop dels $0^{\circ}C$** durant diversos mesos.
+                * **Implicació:** La baixa Tº **paralitza** l'activitat de la planta (aigua no disponible) i impedeix el desenvolupament arbori.
                 """
             )
     
