@@ -49,32 +49,32 @@ def run_quiz():
     # Diccionari amb les preguntes i respostes
     preguntes = {
         "Pregunta 1": {
-            [cite_start]"pregunta": "Si un climograma mostra barres de precipitació molt baixes a l'estiu i una línia de temperatura alta, de quin clima és típic? [cite: 653, 655, 675]",
+            "pregunta": "Si un climograma mostra barres de precipitació molt baixes a l'estiu i una línia de temperatura alta, de quin clima és típic?",
             "opcions": ["Polar", "Mediterrani", "Equatorial", "Oceànic"],
             "correcta": "Mediterrani"
         },
         "Pregunta 2": {
-            [cite_start]"pregunta": "Quin bioma es caracteritza per arbres que perden la fulla a l'hivern, com els roures i els faigs? [cite: 384, 458]",
+            "pregunta": "Quin bioma es caracteritza per arbres que perden la fulla a l'hivern, com els roures i els faigs?",
             "opcions": ["Tundra", "Desert", "Bosc temperat caducifoli", "Selva tropical"],
             "correcta": "Bosc temperat caducifoli"
         },
         "Pregunta 3": {
-            [cite_start]"pregunta": "Les plantes amb fulles petites, pèls o que acumulen aigua (suculentes) s'anomenen xeròfiles i estan adaptades a... [cite: 1016, 1017, 1018, 1021]",
+            "pregunta": "Les plantes amb fulles petites, pèls o que acumulen aigua (suculentes) s'anomenen xeròfiles i estan adaptades a...",
             "opcions": ["La falta de llum", "El fred intens", "La sequera", "Els incendis"],
             "correcta": "La sequera"
         },
         "Pregunta 4": {
-            [cite_start]"pregunta": "Una espècie que només es troba en una regió geogràfica molt concreta (com la *Lagartija aranesa* als Pirineus) s'anomena... [cite: 958, 976]",
+            "pregunta": "Una espècie que només es troba en una regió geogràfica molt concreta (com la *Lagartija aranesa* als Pirineus) s'anomena...",
             "opcions": ["Endemisme", "Hotspot", "Bioma", "Espècie invasora"],
             "correcta": "Endemisme"
         },
         "Pregunta 5": {
-            [cite_start]"pregunta": "Quin és l'arbre dominant en una 'fageda'? [cite: 104]",
+            "pregunta": "Quin és l'arbre dominant en una 'fageda'?",
             "opcions": ["El pi (Pinus)", "L'alzina (Quercus ilex)", "El faig (Fagus sylvatica)", "El roure (Quercus robur)"],
             "correcta": "El faig (Fagus sylvatica)"
         },
          "Pregunta 6": {
-            [cite_start]"pregunta": "Quina classificació europea s'utilitza per catalogar els hàbitats naturals i seminaturals? [cite: 801, 24]",
+            "pregunta": "Quina classificació europea s'utilitza per catalogar els hàbitats naturals i seminaturals?",
             "opcions": ["WWF", "Natura 2000", "CORINE Biotopes", "Whittaker"],
             "correcta": "CORINE Biotopes"
         }
@@ -119,7 +119,7 @@ def run_quiz():
         
         if percentatge == 1.0:
             st.balloons()
-            st.image("img/celebracio.gif", caption="Espectacular! Ho saps tot!") # Recorda afegir aquesta imatge
+            # st.image("img/celebracio.gif", caption="Espectacular! Ho saps tot!") # Recorda afegir aquesta imatge
             st.success("🎉 **FELICITATS! Puntuació Perfecta!** 🎉")
         elif percentatge >= 0.7:
             st.success("Molt bona feina! Has dominat la majoria dels conceptes.")
@@ -167,17 +167,17 @@ elif pagina == "🌍 Biomes de la Terra":
     with st.expander("Què és un Bioma? 🤔"):
         st.markdown(
             """
-            * [cite_start]És el conjunt de comunitats (plantes, animals) que ocupen una mateixa àrea geogràfica. [cite: 355, 844]
-            * [cite_start]Són unitats de gran extensió. [cite: 356, 845]
-            * [cite_start]Presenten una vegetació climàtica uniforme i un clima característic. [cite: 356, 845]
+            * És el conjunt de comunitats (plantes, animals) que ocupen una mateixa àrea geogràfica[cite: 27, 504].
+            * [cite_start]Són unitats de gran extensió[cite: 28, 505].
+            * [cite_start]Presenten una vegetació climàtica uniforme i un clima característic[cite: 28, 505].
             """
         )
     
     st.subheader("Classificació de Biomes (Whittaker)")
-    [cite_start]st.markdown("Una de les maneres més famoses de classificar els biomes és el diagrama de Whittaker, que relaciona la **temperatura mitjana anual** i la **precipitació anual**. [cite: 447, 448]")
+    [cite_start]st.markdown("Una de les maneres més famoses de classificar els biomes és el diagrama de Whittaker, que relaciona la **temperatura mitjana anual** i la **precipitació anual**[cite: 47, 119].")
     
     # Recorda afegir el diagrama de Whittaker a 'img/whittaker.png'
-    # [cite_start]st.image("img/whittaker.png", caption="Diagrama de Biomes de Whittaker [cite: 375, 448]") 
+    # [cite_start]st.image("img/whittaker.png", caption="Diagrama de Biomes de Whittaker [cite: 47, 120]") 
 
     st.header("Explora alguns Biomes Principals")
     
@@ -194,9 +194,9 @@ elif pagina == "🌍 Biomes de la Terra":
         # st.image("img/bosc_temperat.jpg", caption="Exemple de bosc de faigs a la tardor.") # Imatge de mostra
         st.markdown(
             """
-            * [cite_start]**Clima:** Temperat, amb estacions molt marcades. Estius càlids i hiverns freds. Precipitacions abundants (750–1500 mm). [cite: 453, 454]
-            * [cite_start]**Flora:** Arbres de fulla ampla que cau a la tardor (caduca), com roures, faigs, castanyers i aurons. [cite: 458]
-            * **Fauna:** Gran diversitat. [cite_start]Herbívors com cérvols i esquirols; carnívors com guineus i ossos. [cite: 460]
+            * [cite_start]**Clima:** Temperat, amb estacions molt marcades[cite: 126]. [cite_start]Estius càlids i hiverns freds[cite: 125]. [cite_start]Precipitacions abundants (750–1500 mm)[cite: 126].
+            * [cite_start]**Flora:** Arbres de fulla ampla que cau a la tardor (caduca), com roures, faigs, castanyers i aurons[cite: 130].
+            * **Fauna:** Gran diversitat. [cite_start]Herbívors com cérvols i esquirols; carnívors com guineus i ossos[cite: 132].
             """
         )
 
@@ -205,9 +205,9 @@ elif pagina == "🌍 Biomes de la Terra":
         # st.image("img/desert.jpg", caption="Paisatge desèrtic amb cactus.") # Imatge de mostra
         st.markdown(
             """
-            * [cite_start]**Clima:** Molt àrid, precipitacions escasses (< 250 mm/any). Pot ser molt calorós o molt fred. [cite: 599]
-            * **Flora:** Molt escassa i altament adaptada (plantes xeròfiles). Fulles petites o transformades en espines per evitar perdre aigua. [cite_start]Cactus, atzavares. [cite: 483, 1018]
-            * **Fauna:** Adaptada a la sequera i la calor. Molts rèptils. [cite_start]Animals amb hàbits nocturns o crepusculars. [cite: 488]
+            * **Clima:** Molt àrid, precipitacions escasses (< 250 mm/any). Pot ser molt calorós o molt fred.
+            * [cite_start]**Flora:** Molt escassa i altament adaptada (plantes xeròfiles)[cite: 155]. [cite_start]Fulles petites o transformades en espines per evitar perdre aigua[cite: 155]. Cactus, atzavares.
+            * [cite_start]**Fauna:** Adaptada a la sequera i la calor[cite: 160, 161]. Molts rèptils. [cite_start]Animals amb hàbits nocturns o crepusculars[cite: 160].
             """
         )
 
@@ -216,9 +216,9 @@ elif pagina == "🌍 Biomes de la Terra":
         # st.image("img/selva.jpg", caption="Exuberant selva tropical.") # Imatge de mostra
         st.markdown(
             """
-            * [cite_start]**Clima:** Càlid i molt plujós durant tot l'any (2000-4000 mm). Poca variació de temperatura. [cite: 472, 524]
-            * **Flora:** La més diversa del planeta. Vegetació molt densa i estructurada en "pisos" (estrats). [cite_start]Abunden les epífites (que viuen sobre altres plantes) i les lianes. [cite: 475, 477]
-            * [cite_start]**Fauna:** Enorme biodiversitat, especialment d'insectes, amfibis i ocells. [cite: 478]
+            * [cite_start]**Clima:** Càlid i molt plujós durant tot l'any (2000-4000 mm)[cite: 144]. [cite_start]Poca variació de temperatura[cite: 144].
+            * [cite_start]**Flora:** La més diversa del planeta[cite: 148]. [cite_start]Vegetació molt densa i estructurada en "pisos" (estrats)[cite: 147]. [cite_start]Abunden les epífites (que viuen sobre altres plantes) i les lianes[cite: 149].
+            * [cite_start]**Fauna:** Enorme biodiversitat, especialment d'insectes, amfibis i ocells[cite: 150].
             """
         )
         
@@ -227,9 +227,9 @@ elif pagina == "🌍 Biomes de la Terra":
         # st.image("img/praderia.jpg", caption="Extensa praderia americana.") # Imatge de mostra
         st.markdown(
             """
-            * [cite_start]**Clima:** Semiàrid a semihumit. Grans diferències de temperatura entre estiu i hivern. Precipitacions de 300 a 1000 mm. [cite: 462, 464]
-            * **Flora:** Domini de l'estrat herbaci (herbes, gramínies, cereals). [cite_start]Pocs arbres, limitats als cursos d'aigua. [cite: 467, 469]
-            * [cite_start]**Fauna:** Grans herbívors com bisons, antílops o cavalls. [cite: 470]
+            * [cite_start]**Clima:** Semiàrid a semihumit[cite: 134]. [cite_start]Grans diferències de temperatura entre estiu i hivern (gran amplitud tèrmica)[cite: 136]. [cite_start]Precipitacions de 300 a 1000 mm[cite: 135].
+            * [cite_start]**Flora:** Domini de l'estrat herbaci (herbes, gramínies, cereals)[cite: 139]. [cite_start]Pocs arbres, limitats als cursos d'aigua[cite: 141].
+            * [cite_start]**Fauna:** Grans herbívors com bisons, antílops o cavalls[cite: 142].
             """
         )
 
@@ -238,9 +238,9 @@ elif pagina == "🌍 Biomes de la Terra":
         # st.image("img/bosc_med.jpg", caption="Un alzinar típic del mediterrani.") # Imatge de mostra
         st.markdown(
             """
-            * [cite_start]**Clima:** Estius calorosos i secs; hiverns suaus i plujosos. [cite: 653, 655]
-            * **Flora:** Vegetació escleròfil·la (de fulla dura i perenne) per resistir la sequera estival. Arbres com alzines, sureres, pins. [cite_start]Estrat arbustiu molt ric (llentiscle, bruc, romaní). [cite: 493]
-            * **Fauna:** Adaptada a la sequera. [cite_start]Herbívors com el porc senglar, cabirols; carnívors com la guineu, geneta i el linx ibèric. [cite: 495]
+            * [cite_start]**Clima:** Estius calorosos i secs; hiverns suaus i plujosos[cite: 325].
+            * [cite_start]**Flora:** Vegetació escleròfil·la (de fulla dura i perenne) per resistir la sequera estival[cite: 165]. [cite_start]Arbres com alzines, sureres, pins[cite: 165]. [cite_start]Estrat arbustiu molt ric (llentiscle, bruc, romaní)[cite: 165].
+            * **Fauna:** Adaptada a la sequera. [cite_start]Herbívors com el porc senglar, cabirols; carnívors com la guineu, geneta i el linx ibèric[cite: 167].
             """
         )
 
@@ -248,16 +248,16 @@ elif pagina == "🌍 Biomes de la Terra":
 # 📊 CLIMOGRAMES
 elif pagina == "📊 Climogrames":
     st.title("📊 Què és un Climograma?")
-    [cite_start]st.markdown("És la eina més important per entendre el clima d'un lloc d'un cop d'ull. Ens diu quan fa calor, quan fa fred, quan plou i quan hi ha sequera. [cite: 507]")
+    [cite_start]st.markdown("És la eina més important per entendre el clima d'un lloc d'un cop d'ull. Ens diu quan fa calor, quan fa fred, quan plou i quan hi ha sequera[cite: 179].")
 
     st.header("Com llegir un Climograma?")
     st.markdown(
         """
-        [cite_start]Un climograma combina dues dades clau en un sol gràfic: **Temperatura** i **Precipitació**. [cite: 508]
+        [cite_start]Un climograma combina dues dades clau en un sol gràfic: **Temperatura** i **Precipitació**[cite: 180].
 
-        1.  [cite_start]**Eix Horitzontal (X):** Mostra els mesos de l'any (Gener, Febrer, Març...). [cite: 511]
-        2.  **Eix Vertical Esquerre (Tª):** Mostra les temperatures $(^{\circ}C)$. [cite_start]Normalment es representa amb una **línia (vermella o taronja)**. [cite: 512]
-        3.  **Eix Vertical Dret (P):** Mostra les precipitacions (mm). [cite_start]Normalment es representa amb **barres (blaves)**. [cite: 513]
+        1.  [cite_start]**Eix Horitzontal (X):** Mostra els mesos de l'any (Gener, Febrer, Març...)[cite: 183].
+        2.  **Eix Vertical Esquerre (Tª):** Mostra les temperatures $(^{\circ}C)$. [cite_start]Normalment es representa amb una **línia (vermella o taronja)**[cite: 184].
+        3.  **Eix Vertical Dret (P):** Mostra les precipitacions (mm). [cite_start]Normalment es representa amb **barres (blaves)**[cite: 185].
         
         **TRUC:** En molts climogrames (com els dels exemples), es diu que hi ha un **període d'aridesa** (sequera) quan la línia de temperatures $(T)$ passa per sobre de les barres de precipitació $(P)$.
         """
@@ -270,24 +270,24 @@ elif pagina == "📊 Climogrames":
     c_tab1, c_tab2, c_tab3, c_tab4 = st.tabs(["Clima Equatorial (Akassa)", "Clima Mediterrani (Nàpols)", "Clima Desèrtic (Alexandria)", "Clima Polar (Thule)"])
     
     with c_tab1:
-        [cite_start]st.subheader("Clima Equatorial [cite: 520]")
-        [cite_start]st.markdown("*Temperatures altes i pluges abundants tot l'any.* [cite: 524, 525]")
-        # [cite_start]st.image("img/climo_equatorial.png", caption="Climograma d'Akassa (Congo) [cite: 527]") # Imatge de mostra
+        st.subheader("Clima Equatorial")
+        [cite_start]st.markdown("*Temperatures altes i pluges abundants tot l'any[cite: 196]. [cite_start]Línia de Tª gairebé recta i alta[cite: 197].*")
+        # [cite_start]st.image("img/climo_equatorial.png", caption="Climograma d'Akassa (Congo) [cite: 199]") # Imatge de mostra
     
     with c_tab2:
-        [cite_start]st.subheader("Clima Mediterrani [cite: 639]")
-        [cite_start]st.markdown("*Estius secs i calorosos, hiverns suaus i plujosos. Fixa't en la 'vall' de pluja a l'estiu!* [cite: 653, 655, 675]")
-        # [cite_start]st.image("img/climo_mediterrani.png", caption="Climograma de Nàpols (Itàlia) [cite: 656]") # Imatge de mostra
+        st.subheader("Clima Mediterrani")
+        [cite_start]st.markdown("*Estius secs i calorosos, hiverns suaus i plujosos[cite: 325]. [cite_start]Fixa't en la 'vall' de pluja a l'estiu! [cite: 347]*")
+        # [cite_start]st.image("img/climo_mediterrani.png", caption="Climograma de Nàpols (Itàlia) [cite: 328]") # Imatge de mostra
 
     with c_tab3:
-        [cite_start]st.subheader("Clima Desèrtic [cite: 598]")
-        [cite_start]st.markdown("*Pluges gairebé inexistents tot l'any.* [cite: 599, 637]")
-        # [cite_start]st.image("img/climo_desertic.png", caption="Climograma d'Alexandria (Egipte) [cite: 601]") # Imatge de mostra
+        st.subheader("Clima Desèrtic")
+        [cite_start]st.markdown("*Pluges gairebé inexistents (molt escasses) tot l'any[cite: 271, 309].*")
+        # [cite_start]st.image("img/climo_desertic.png", caption="Climograma d'Alexandria (Egipte) [cite: 273]") # Imatge de mostra
 
     with c_tab4:
-        [cite_start]st.subheader("Clima Polar [cite: 745]")
-        [cite_start]st.markdown("*Temperatures sempre molt baixes (gairebé tot l'any sota $0^{\circ}C$) i precipitacions escasses (en forma de neu).* [cite: 749, 751, 752]")
-        # [cite_start]st.image("img/climo_polar.png", caption="Climograma de Thule (Grenlàndia) [cite: 753]") # Imatge de mostra
+        st.subheader("Clima Polar")
+        [cite_start]st.markdown("*Temperatures sempre molt baixes (línia per sota dels $0^{\circ}C$) i precipitacions escasses (en forma de neu)[cite: 423, 424].*")
+        # [cite_start]st.image("img/climo_polar.png", caption="Climograma de Thule (Grenlàndia) [cite: 425]") # Imatge de mostra
 
 
 # 🇪🇸 HÀBITATS A ESPANYA
@@ -296,39 +296,39 @@ elif pagina == "🇪🇸 Hàbitats a Espanya":
     st.markdown("La Península Ibèrica és un punt calent de biodiversitat gràcies a la seva posició i relleu.")
 
     st.header("Les Grans Regions Biogeogràfiques")
-    [cite_start]st.markdown("Espanya es divideix principalment en tres grans regions biogeogràfiques: [cite: 218]")
+    [cite_start]st.markdown("Espanya es divideix principalment en tres grans regions biogeogràfiques[cite: 708]:")
     
-    # [cite_start]st.image("img/mapa_bio_espanya.png", caption="Mapa de les regions biogeogràfiques d'Espanya [cite: 237]") # Imatge de mostra
+    # [cite_start]st.image("img/mapa_bio_espanya.png", caption="Mapa de les regions biogeogràfiques d'Espanya [cite: 727]") # Imatge de mostra
     
     bio_tab1, bio_tab2, bio_tab3 = st.tabs(["🟢 Regió Eurosiberiana", "🟠 Regió Mediterrània", "🌋 Regió Macaronèsica"])
 
     with bio_tab1:
         st.subheader("🟢 Regió Eurosiberiana")
-        [cite_start]st.markdown("Correspon al nord de la península (la 'Espanya verda'). [cite: 221, 223]")
+        [cite_start]st.markdown("Correspon al nord de la península (la 'Espanya verda')[cite: 711, 713].")
         st.markdown(
             """
-            * [cite_start]**Clima:** Temperatures suaus i estius humits. [cite: 222]
-            * [cite_start]**Vegetació:** Boscos caducifolis, principalment roures i faigs. [cite: 223]
+            * [cite_start]**Clima:** Temperatures suaus i estius humits[cite: 712].
+            * [cite_start]**Vegetació:** Boscos caducifolis, principalment roures i faigs[cite: 713].
             """
         )
     
     with bio_tab2:
         st.subheader("🟠 Regió Mediterrània")
-        [cite_start]st.markdown("Ocupa el 80% de la Península i les Balears. [cite: 225]")
+        [cite_start]st.markdown("Ocupa el 80% de la Península i les Balears[cite: 715].")
         st.markdown(
             """
-            * [cite_start]**Clima:** Estius càlids i secs, que provoquen estrès hídric. [cite: 226]
-            * [cite_start]**Vegetació:** Boscos perennifolis (fulla dura), dominats per l'alzina i el pi blanc. [cite: 227]
+            * [cite_start]**Clima:** Estius càlids i secs, que provoquen estrès hídric[cite: 716].
+            * [cite_start]**Vegetació:** Boscos perennifolis (fulla dura), dominats per l'alzina i el pi blanc[cite: 717].
             """
         )
 
     with bio_tab3:
         st.subheader("🌋 Regió Macaronèsica")
-        [cite_start]st.markdown("Correspon a les Illes Canàries. [cite: 230]")
+        [cite_start]st.markdown("Correspon a les Illes Canàries[cite: 720].")
         st.markdown(
             """
-            * [cite_start]**Clima:** Molt divers segons l'altitud i l'orientació (vents alisis). [cite: 231]
-            * [cite_start]**Vegetació:** Una gran diversitat, des de zones subdesèrtiques a boscos de laurisilva (perennifolis) i pinedes. [cite: 232, 233, 234]
+            * [cite_start]**Clima:** Molt divers segons l'altitud i l'orientació (vents alisis)[cite: 720, 721].
+            * [cite_start]**Vegetació:** Una gran diversitat, des de zones subdesèrtiques a boscos de laurisilva (perennifolis) i pinedes[cite: 722, 723, 724].
             """
         )
 
@@ -337,28 +337,28 @@ elif pagina == "🇪🇸 Hàbitats a Espanya":
     with st.expander("El projecte CORINE Biotopes 🇪🇺"):
         st.markdown(
             """
-            * [cite_start]És una iniciativa de la Unió Europea per **catalogar tots els hàbitats** naturals i seminaturals. [cite: 801]
-            * [cite_start]Utilitza un sistema jeràrquic de codis numèrics per classificar-los. [cite: 817, 818]
+            * [cite_start]És una iniciativa de la Unió Europea per **catalogar tots els hàbitats** naturals i seminaturals[cite: 842, 994].
+            * [cite_start]Utilitza un sistema jeràrquic de codis numèrics per classificar-los[cite: 842, 1010].
             * És la base per a moltes polítiques de conservació.
-            * [cite_start]A Catalunya, s'han identificat molts hàbitats seguint aquesta classificació, adaptant-la a la realitat catalana. [cite: 25]
+            * [cite_start]A Catalunya, s'han identificat molts hàbitats seguint aquesta classificació, adaptant-la a la realitat catalana[cite: 843].
             """
         )
 
     with st.expander("La Xarxa Natura 2000 🐦"):
         st.markdown(
             """
-            * [cite_start]És la principal eina de protecció de la natura de la UE. [cite: 248]
-            * [cite_start]Està formada per àrees de conservació de la biodiversitat. [cite: 249]
-            * Es basa en dues directives:
+            * [cite_start]És la principal eina de protecció de la natura de la UE[cite: 738].
+            * [cite_start]Està formada per àrees de conservació de la biodiversitat[cite: 739].
+            * [cite_start]Es basa en dues directives[cite: 740]:
                 1.  **Directiva Ocells (ZEPA):** Zones d'Especial Protecció per a les Aus.
-                2.  [cite_start]**Directiva Hàbitats (ZEC):** Zones Especials de Conservació, per protegir hàbitats i espècies (excepte ocells). [cite: 250, 251]
+                2.  [cite_start]**Directiva Hàbitats (ZEC):** Zones Especials de Conservació, per protegir hàbitats i espècies (excepte ocells)[cite: 740, 741].
             """
         )
 
 # 🏞️ HÀBITATS DE CATALUNYA
 elif pagina == "🏞️ Hàbitats de Catalunya":
     st.title("🏞️ Hàbitats de Catalunya")
-    [cite_start]st.markdown("Gràcies al seu relleu (Pirineus, Pre-litoral, Litoral) i la influència del Mediterrani, Catalunya té una riquesa d'hàbitats extraordinària. [cite: 827]")
+    [cite_start]st.markdown("Gràcies al seu relleu (Pirineus, Pre-litoral, Litoral) i la influència del Mediterrani, Catalunya té una riquesa d'hàbitats extraordinària[cite: 1020].")
     
     st.info("Explorem alguns dels boscos més emblemàtics que s'esmenten als documents.")
     
@@ -371,27 +371,27 @@ elif pagina == "🏞️ Hàbitats de Catalunya":
 
     with hab_tab1:
         st.subheader("🌳 La Fageda (Bosc de Faigs)")
-        # [cite_start]st.image("img/fageda.jpg", caption="Interior d'una fageda, com la Fageda d'en Jordà. [cite: 321]") # Imatge de mostra
-        [cite_start]st.markdown("Es troben a les àrees muntanyoses humides del nord-est (Montseny, Garrotxa...) i al Pirineu. [cite: 102]")
+        # st.image("img/fageda.jpg", caption="Interior d'una fageda, com la Fageda d'en Jordà.") # Imatge de mostra
+        [cite_start]st.markdown("Es troben a les àrees muntanyoses humides del nord-est (Montseny, Garrotxa...) i al Pirineu[cite: 920].")
         
         col1, col2 = st.columns(2)
         with col1:
-            [cite_start]st.markdown("#### 🌿 Flora Típica [cite: 104]")
+            st.markdown("#### 🌿 Flora Típica")
             st.markdown(
                 """
-                * **Arbre dominant:** Faig (*Fagus sylvatica*)
-                * **Altres arbres:** Avet (*Abies alba*), Blada (*Acer opalus*)
-                * **Arbusts:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*)
-                * **Herbes:** Herba fetgera (*Hepatica nobilis*), Jolia (*Scilla lilio-hyacinthus*)
+                * [cite_start]**Arbre dominant:** Faig (*Fagus sylvatica*) [cite: 922]
+                * [cite_start]**Altres arbres:** Avet (*Abies alba*), Blada (*Acer opalus*) [cite: 922]
+                * [cite_start]**Arbusts:** Boix (*Buxus sempervirens*), Grèvol (*Ilex aquifolium*) [cite: 922]
+                * [cite_start]**Herbes:** Herba fetgera (*Hepatica nobilis*), Jolia (*Scilla lilio-hyacinthus*) [cite: 922]
                 """
             )
         with col2:
-            [cite_start]st.markdown("#### 🐾 Fauna Típica [cite: 105]")
+            st.markdown("#### 🐾 Fauna Típica")
             st.markdown(
                 """
-                * **Amfibis:** Salamandra (*Salamandra salamandra*), Gripau comú (*Bufo bufo*)
-                * **Ocells:** Picot garser gros (*Dendrocopos major*), Mallerenga carbonera (*Parus major*)
-                * **Mamífers:** Esquirol (*Sciurus vulgaris*), Guineu (*Vulpes vulpes*), Rata de bosc (*Apodemus sylvaticus*)
+                * [cite_start]**Amfibis:** Salamandra (*Salamandra salamandra*), Gripau comú (*Bufo bufo*) [cite: 923]
+                * [cite_start]**Ocells:** Picot garser gros (*Dendrocopos major*), Mallerenga carbonera (*Parus major*) [cite: 923]
+                * [cite_start]**Mamífers:** Esquirol (*Sciurus vulgaris*), Guineu (*Vulpes vulpes*), Rata de bosc (*Apodemus sylvaticus*) [cite: 923]
                 """
             )
 
@@ -402,21 +402,21 @@ elif pagina == "🏞️ Hàbitats de Catalunya":
         
         col1, col2 = st.columns(2)
         with col1:
-            [cite_start]st.markdown("#### 🌿 Flora Típica [cite: 109, 110]")
+            st.markdown("#### 🌿 Flora Típica")
             st.markdown(
                 """
-                * **Arbre dominant:** Alzina (*Quercus ilex*)
-                * **Arbusts:** Marfull (*Viburnum tinus*), Arboç (*Arbutus unedo*), Aladern (*Rhamnus alaternus*)
-                * **Lianes:** Arítjol (*Smilax aspera*), Heura (*Hedera helix*)
-                * **Herbes:** Falzia negra (*Asplenium adiantum-nigrum*)
+                * [cite_start]**Arbre dominant:** Alzina (*Quercus ilex*) [cite: 927]
+                * [cite_start]**Arbusts:** Marfull (*Viburnum tinus*), Arboç (*Arbutus unedo*), Aladern (*Rhamnus alaternus*) [cite: 927]
+                * [cite_start]**Lianes:** Arítjol (*Smilax aspera*), Heura (*Hedera helix*) [cite: 928]
+                * [cite_start]**Herbes:** Falzia negra (*Asplenium adiantum-nigrum*) [cite: 928]
                 """
             )
         with col2:
-            [cite_start]st.markdown("#### 🐾 Fauna Típica [cite: 112]")
+            st.markdown("#### 🐾 Fauna Típica")
             st.markdown(
                 """
-                * **Ocells:** Gamarús (*Strix aluco*)
-                * **Mamífers:** Porc senglar (*Sus scrofa*), Geneta (*Genetta genetta*), Musaranya (*Sorex araneus*)
+                * [cite_start]**Ocells:** Gamarús (*Strix aluco*) [cite: 930]
+                * [cite_start]**Mamífers:** Porc senglar (*Sus scrofa*), Geneta (*Genetta genetta*), Musaranya (*Sorex araneus*) [cite: 930]
                 * *(La fauna és molt rica i comparteix moltes espècies amb altres boscos)*
                 """
             )
@@ -424,50 +424,50 @@ elif pagina == "🏞️ Hàbitats de Catalunya":
     with hab_tab3:
         st.subheader("🌲 Pineda de Pi Negre (*Pinus mugo*)")
         # st.image("img/pi_negre.jpg", caption="Bosc de Pi Negre a gran altitud, al Pirineu.") # Imatge de mostra
-        [cite_start]st.markdown("Forma el límit del bosc a l'alta muntanya pirinenca. És un bosc subalpí. [cite: 113]")
+        [cite_start]st.markdown("Forma el límit del bosc a l'alta muntanya pirinenca. És un bosc subalpí[cite: 932].")
         
         col1, col2 = st.columns(2)
         with col1:
-            [cite_start]st.markdown("#### 🌿 Flora Típica [cite: 116]")
+            st.markdown("#### 🌿 Flora Típica")
             st.markdown(
                 """
-                * **Arbre dominant:** Pi negre (*Pinus uncinata*)
-                * **Arbusts:** Nabiu (*Vaccinium myrtillus*), Neret (*Rhododendron ferrugineum*), Ginebre (*Juniperus communis*)
-                * **Herbes:** Ussona (*Festuca gautieri*)
+                * [cite_start]**Arbre dominant:** Pi negre (*Pinus uncinata*) [cite: 934]
+                * [cite_start]**Arbusts:** Nabiu (*Vaccinium myrtillus*), Neret (*Rhododendron ferrugineum*), Ginebre (*Juniperus communis*) [cite: 934]
+                * [cite_start]**Herbes:** Ussona (*Festuca gautieri*) [cite: 934]
                 """
             )
         with col2:
-            [cite_start]st.markdown("#### 🐾 Fauna Típica [cite: 118]")
+            st.markdown("#### 🐾 Fauna Típica")
             st.markdown(
                 """
-                * **Rèptils:** Escurçó pirinenc (*Vipera aspis*), Sargantana vivípara (*Lacerta vivipara*)
-                * **Ocells:** Picot negre (*Dryocopus martius*), Trencapinyes (*Loxia curvirostra*)
-                * **Mamífers:** Isard (*Rupicapra pyrenaica*), Ós bru (*Ursus arctos*), Marmota (*Marmota marmota*)
+                * [cite_start]**Rèptils:** Escurçó pirinenc (*Vipera aspis*), Sargantana vivípara (*Lacerta vivipara*) [cite: 936]
+                * [cite_start]**Ocells:** Picot negre (*Dryocopus martius*), Trencapinyes (*Loxia curvirostra*) [cite: 936]
+                * [cite_start]**Mamífers:** Isard (*Rupicapra pyrenaica*), Ós bru (*Ursus arctos*), Marmota (*Marmota marmota*) [cite: 936]
                 """
             )
 
     with hab_tab4:
         st.subheader("🌲 Pineda de Pi Roig (*Pinus sylvestris*)")
         # st.image("img/pi_roig.jpg", caption="Pi roig, característic pel seu tronc ataronjat.") # Imatge de mostra
-        [cite_start]st.markdown("Bosc de muntanya mitjana, molt estès al Prepirineu, Pirineu i zones interiors. [cite: 121]")
+        [cite_start]st.markdown("Bosc de muntanya mitjana, molt estès al Prepirineu, Pirineu i zones interiors[cite: 940].")
         
         col1, col2 = st.columns(2)
         with col1:
-            [cite_start]st.markdown("#### 🌿 Flora Típica [cite: 124]")
+            st.markdown("#### 🌿 Flora Típica")
             st.markdown(
                 """
-                * **Arbre dominant:** Pi roig (*Pinus sylvestris*)
-                * **Arbusts:** Boixerola (*Arctostaphylos uva-ursi*), Boix (*Buxus sempervirens*), Nabiu (*Vaccinium myrtillus*)
-                * **Herbes:** Herba fetgera (*Hepatica nobilis*), Falzia de bosc (*Asplenium onopteris*)
+                * [cite_start]**Arbre dominant:** Pi roig (*Pinus sylvestris*) [cite: 942]
+                * [cite_start]**Arbusts:** Boixerola (*Arctostaphylos uva-ursi*), Boix (*Buxus sempervirens*), Nabiu (*Vaccinium myrtillus*) [cite: 942]
+                * [cite_start]**Herbes:** Herba fetgera (*Hepatica nobilis*), Falzia de bosc (*Asplenium onopteris*) [cite: 942]
                 """
             )
         with col2:
-            [cite_start]st.markdown("#### 🐾 Fauna Típica [cite: 126]")
+            st.markdown("#### 🐾 Fauna Típica")
             st.markdown(
                 """
-                * **Amfibis:** Gripau comú (*Bufo bufo*), Salamandra (*Salamandra salamandra*)
-                * **Ocells:** Astor (*Accipiter gentilis*), Picot negre (*Dryocopus martius*), Mallerenga petita (*Parus ater*)
-                * **Mamífers:** Esquirol (*Sciurus vulgaris*), Cérvol (*Cervus elaphus*), Cabirol (*Capreolus capreolus*), Fagina (*Martes foina*)
+                * [cite_start]**Amfibis:** Gripau comú (*Bufo bufo*), Salamandra (*Salamandra salamandra*) [cite: 944]
+                * [cite_start]**Ocells:** Astor (*Accipiter gentilis*), Picot negre (*Dryocopus martius*), Mallerenga petita (*Parus ater*) [cite: 944]
+                * [cite_start]**Mamífers:** Esquirol (*Sciurus vulgaris*), Cérvol (*Cervus elaphus*), Cabirol (*Capreolus capreolus*), Fagina (*Martes foina*) [cite: 944]
                 """
             )
 
@@ -483,34 +483,34 @@ elif pagina == "🌱 Conceptes Clau (Biodiversitat i Adaptacions)":
         st.subheader("Què és la Biodiversitat?")
         st.markdown(
             """
-            [cite_start]Segons el Conveni Internacional de la Diversitat Biològica (Rio 1992), és l'**àmplia varietat d'éssers vius sobre la Terra**. [cite: 859]
+            [cite_start]Segons el Conveni Internacional de la Diversitat Biològica (Rio 1992), és l'**àmplia varietat d'éssers vius sobre la Terra**[cite: 518, 519].
             
-            [cite_start]Comprèn 3 nivells: [cite: 865]
-            1.  [cite_start]**Diversitat Genètica:** La varietat de gens dins d'una mateixa espècie (ex: les diferents mides o colors d'una flor). [cite: 869]
-            2.  [cite_start]**Diversitat Específica:** La varietat d'espècies en una regió (ex: tots els ocells, mamífers, insectes... d'un bosc). [cite: 867]
-            3.  [cite_start]**Diversitat Ecològica (d'Ecosistemes):** La varietat d'hàbitats, comunitats i ecosistemes (ex: un delta té platges, dunes, llacunes, boscos de ribera...). [cite: 870]
+            [cite_start]Comprèn 3 nivells[cite: 525]:
+            1.  [cite_start]**Diversitat Genètica:** La varietat de gens dins d'una mateixa espècie[cite: 529].
+            2.  [cite_start]**Diversitat Específica:** La varietat d'espècies en una regió[cite: 527].
+            3.  [cite_start]**Diversitat Ecològica (d'Ecosistemes):** La varietat d'hàbitats i comunitats biològiques[cite: 531].
             """
         )
         
         st.subheader("Què és un Endemisme?")
         st.markdown(
             """
-            [cite_start]Un **endemisme** és una espècie (o tàxon) que té una àrea de distribució natural **molt limitada** a una regió geogràfica concreta i no es troba de forma natural enlloc més del món. [cite: 958]
+            [cite_start]Un **endemisme** és una espècie (o tàxon) que té una àrea de distribució natural **molt limitada** a una regió geogràfica concreta i no es troba de forma natural enlloc més del món[cite: 618].
             
-            * [cite_start]**Exemple:** La *Lagartija aranesa* (*Iberolacerta aranica*) només es troba en una petita zona dels Pirineus. [cite: 976]
-            * [cite_start]**Causa:** Sovint es formen per **aïllament geogràfic** (illes, muntanyes), que fa que una població evolucioni de manera diferent. [cite: 971]
+            * [cite_start]**Exemple:** La *Lagartija aranesa* (*Iberolacerta aranica*) només es troba en una petita zona dels Pirineus[cite: 636].
+            * [cite_start]**Causa:** Sovint es formen per **aïllament geogràfic** (illes, muntanyes), que fa que una població evolucioni de manera diferent[cite: 619, 631].
             """
         )
-        # [cite_start]st.image("img/endemisme.jpg", caption="El Desman dels Pirineus (Galemys pyrenaicus), un endemisme pirinenc. [cite: 975]") # Imatge de mostra
+        # [cite_start]st.image("img/endemisme.jpg", caption="El Desman dels Pirineus (Galemys pyrenaicus), un endemisme pirinenc[cite: 635].") # Imatge de mostra
 
         st.subheader("Què són els 'Hotspots' (Punts Calents)?")
         st.markdown(
             """
-            [cite_start]Són llocs del planeta que tenen una **concentració excepcionalment alta d'espècies**, especialment d'endemismes, però que alhora estan **molt amenaçats** per l'activitat humana. [cite: 895, 896]
-            [cite_start]La Conca Mediterrània és un d'aquests 34 'hotspots' mundials. [cite: 911, 951]
+            [cite_start]Són llocs del planeta que tenen una **concentració excepcionalment alta d'espècies**[cite: 555], especialment d'endemismes, però que alhora estan **molt amenaçats** per l'activitat humana.
+            [cite_start]La Conca Mediterrània és un d'aquests 34 'hotspots' mundials[cite: 571].
             """
         )
-        # [cite_start]st.image("img/hotspots.png", caption="Mapa dels 'hotspots' de biodiversitat del món. [cite: 951]") # Imatge de mostra
+        # [cite_start]st.image("img/hotspots.png", caption="Mapa dels 'hotspots' de biodiversitat del món[cite: 602].") # Imatge de mostra
 
 
     with conceptes_tab2:
@@ -520,37 +520,37 @@ elif pagina == "🌱 Conceptes Clau (Biodiversitat i Adaptacions)":
         with st.expander("Adaptacions a la FALTA DE LLUM 💡 (ex: sotabosc de la selva)"):
             st.markdown(
                 """
-                * [cite_start]**Augment de la superfície foliar:** Fulles molt grans per captar la màxima llum possible. [cite: 989]
-                * [cite_start]**Més clorofil·la:** Fulles de color verd molt fosc per optimitzar la fotosíntesi amb poca llum. [cite: 992]
-                * [cite_start]**Trepar:** Estratègies per enfilar-se (lianes) i arribar a zones més altes i lluminoses. [cite: 993]
+                * [cite_start]**Augment de la superfície foliar:** Fulles molt grans per captar la màxima llum possible[cite: 456].
+                * [cite_start]**Més clorofil·la:** Fulles de color verd molt fosc per optimitzar la fotosíntesi amb poca llum[cite: 459].
+                * [cite_start]**Trepar:** Estratègies per enfilar-se (lianes) i arribar a zones més altes i lluminoses[cite: 460].
                 """
             )
         
         with st.expander("Adaptacions al FRED 🥶 (ex: alta muntanya)"):
             st.markdown(
                 """
-                * [cite_start]**Mida petita:** Creixen arran de terra per aprofitar la calor del sòl i protegir-se del vent. [cite: 1005]
-                * [cite_start]**Perdre la fulla:** Els arbres caducifolis perden les fulles per evitar la congelació i estalviar energia. [cite: 1008]
-                * [cite_start]**Saba espessa:** Concentren sucres a la saba per actuar com a "anticongelant". [cite: 1006]
+                * [cite_start]**Mida petita:** Creixen arran de terra per aprofitar la calor del sòl i protegir-se del vent[cite: 472].
+                * [cite_start]**Perdre la fulla:** Els arbres caducifolis perden les fulles per evitar la congelació i estalviar energia[cite: 475].
+                * [cite_start]**Saba espessa:** Concentren sucres a la saba per actuar com a "anticongelant"[cite: 473].
                 """
             )
 
         with st.expander("Adaptacions a la SEQUERA (Plantes Xeròfiles) 🥵 (ex: desert, mediterrani)"):
             st.markdown(
                 """
-                * [cite_start]**Fulles petites o espines:** Redueixen la superfície de transpiració per no perdre aigua (ex: cactus, pins). [cite: 1017, 1018]
-                * [cite_start]**Acumulació d'aigua:** Teixits suculents (plantes crasses) que emmagatzemen aigua. [cite: 1020]
-                * [cite_start]**Pèls i ceres:** Creen una capa protectora a la fulla (color grisós o blanquinós) que reflecteix la llum i redueix la pèrdua d'aigua. [cite: 1021]
-                * [cite_start]**Arrels profundes:** Per anar a buscar aigua a capes molt profundes del sòl. [cite: 1022]
+                * [cite_start]**Fulles petites o espines:** Redueixen la superfície de transpiració per no perdre aigua (ex: cactus, pins)[cite: 484, 485].
+                * [cite_start]**Acumulació d'aigua:** Teixits suculents (plantes crasses) que emmagatzemen aigua[cite: 487].
+                * [cite_start]**Pèls i ceres:** Creen una capa protectora a la fulla (color grisós o blanquinós) que reflecteix la llum i redueix la pèrdua d'aigua[cite: 488].
+                * [cite_start]**Arrels profundes:** Per anar a buscar aigua a capes molt profundes del sòl[cite: 489].
                 """
             )
-            # [cite_start]st.image("img/xerofiles.jpg", caption="L'Olea europaea (olivera) és un exemple de planta adaptada a la sequera. [cite: 1023]") # Imatge de mostra
+            # [cite_start]st.image("img/xerofiles.jpg", caption="L'Olea europaea (olivera) és un exemple de planta adaptada a la sequera[cite: 490].") # Imatge de mostra
 
         with st.expander("Adaptacions als INCENDIS 🔥 (Plantes Piròfites)"):
             st.markdown(
                 """
-                * [cite_start]**Rebrotada ràpida:** Capacitat de rebrotar des de la base o l'arrel després que la part aèria s'hagi cremat. [cite: 1027]
-                * [cite_start]**Germinació post-foc:** Algunes plantes (com el *Pinus halepensis*) tenen pinyes seròtines que només s'obren i alliberen les llavors amb la calor del foc, assegurant la repoblació. [cite: 1028, 1031]
+                * [cite_start]**Rebrotada ràpida:** Capacitat de rebrotar des de la base o l'arrel després que la part aèria s'hagi cremat[cite: 494].
+                * [cite_start]**Germinació post-foc:** Algunes plantes (com el *Pinus halepensis*) tenen pinyes seròtines que només s'obren i alliberen les llavors amb la calor del foc, assegurant la repoblació[cite: 495, 498].
                 """
             )
 
