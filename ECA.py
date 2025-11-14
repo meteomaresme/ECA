@@ -593,4 +593,4 @@ elif pagina == "🌱 Adaptacions i Biodiversitat (NF 1.1)":
             st.markdown(f"- **Contrast (Cosmopolita):** Espècie distribuïda per tot el món.")
 
 elif pagina == "❓ Posa't a Prova! (Quiz)":
-    run_quiz()
+    run_quiz()```
