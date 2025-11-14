@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "9.0.FULL_DOC_V2", # Nova Versió amb documentació climograma i estructura millorada
+            "VERSION": "9.1.SYNTAX_FIX", # Nova Versió amb correcció de sintaxi
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -244,6 +244,10 @@ def inject_futuristic_style():
 def highlight(text, color="highlight"):
     return f'<span class="{color}">{text}</span>'
 
+# Funció per subratllar text amb color d'advertència
+def warning_highlight(text, color="warning-highlight"):
+    return f'<span class="{color}">{text}</span>'
+
 # --- Configuració de la Pàgina ---
 st.set_page_config(
     page_title="Terminal UF1: Caracterització d'Hàbitats",
@@ -367,12 +371,12 @@ def run_quiz():
                 with status_col:
                     st.success("STATUS: OK")
                 with res_col:
-                    st.markdown(f"**{key}**: Resposta: `{highlight(resposta_usuari, 'highlight')}`")
+                    st.markdown(f"**{key}**: Resposta: `{highlight(resposta_usuari)}`", unsafe_allow_html=True)
             else:
                 with status_col:
                     st.error("STATUS: ERROR")
                 with res_col:
-                    st.markdown(f"**{key}**: La teva resposta: `{warning_highlight(resposta_usuari, 'warning-highlight')}`. **Correcta**: `{highlight(resposta_correcta, 'highlight')}`", unsafe_allow_html=True)
+                    st.markdown(f"**{key}**: La teva resposta: `{warning_highlight(resposta_usuari)}`. **Correcta**: `{highlight(resposta_correcta)}`", unsafe_allow_html=True)
 
         st.markdown("---")
         st.subheader(f"Puntuació Final del Sistema: **{score}/{total_preguntes}**")
@@ -389,7 +393,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 9.0")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 9.1")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -580,7 +584,7 @@ elif pagina == "📊 Climogrames i Distribució":
                 f"""
                 * {highlight('HUMITAT')}: La línia **Blava (P)** es troba {highlight('per sobre')} de la línia **Vermella (T)**. L'aigua no és limitant.
                 * {highlight('SEQUERA (ARIDESA)')}: La línia **Vermella (T)** es troba {highlight('per sobre')} de la línia **Blava (P)**. L'aigua és el factor limitant.
-                * {highlight('GELADA/FRED')}: La línia **Vermella (T)** cau {highlight('per sota dels $0^{\\circ}C$')}. Paralització de l'activitat de la planta.
+                * {highlight('GELADA/FRED')}: La línia **Vermella (T)** cau {highlight('per sota dels $0^{\circ}C$')}. Paralització de l'activitat de la planta.
                 """
             , unsafe_allow_html=True)
 
@@ -617,7 +621,7 @@ elif pagina == "📊 Climogrames i Distribució":
             st.markdown(
                 f"""
                 * **Factor Clau:** {highlight('Fred extrem')} i limitant.
-                * **Visualització:** La línia vermella (T) es troba {highlight('per sota o molt a prop dels $0^{\\circ}C$')} durant diversos mesos.
+                * **Visualització:** La línia vermella (T) es troba {highlight('per sota o molt a prop dels $0^{\circ}C$')} durant diversos mesos.
                 * **Implicació:** La baixa Tº {highlight('paralitza')} l'activitat de la planta (aigua no disponible) i impedeix el desenvolupament arbori.
                 """
             , unsafe_allow_html=True)
