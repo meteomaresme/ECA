@@ -9,7 +9,7 @@ def initialize_system():
         st.session_state.progress = 0
         st.session_state.config = {
             "PROJECT_NAME": "TERMINAL_UF1_HABITATS",
-            "VERSION": "8.2.CLIMOGRAM_DOC", # Nova Versió amb documentació climograma
+            "VERSION": "8.3.CLIMOGRAM_IMAGES", # Nova Versió amb imatges
             "AUTHORS": "IMR_Bio-Lab"
         }
 
@@ -282,7 +282,7 @@ def run_quiz():
             st.error("ERROR CRÍTIC. Repassa la UF1 abans de tornar a executar el test.")
             
 # --- BARRA LATERAL (SIDEBAR) ---
-st.sidebar.title("🧬 Mòdul Bio-Explorador 8.2")
+st.sidebar.title("🧬 Mòdul Bio-Explorador 8.3")
 st.sidebar.markdown("Un recorregut digital per la vida a la Terra. (**MP 02: Medi Natural**)")
 
 pagina = st.sidebar.radio(
@@ -317,6 +317,8 @@ if pagina == "🏠 Inici & Estat del Sistema":
         Aquesta aplicació cobreix els coneixements mínims requerits per la Unitat Formativa 1.
         """
     )
+    # Imatge per a l'Estat del Sistema
+    st.image("", caption="Estat del Sistema: Mòduls Operatius")
 
     col_nf1, col_nf2 = st.columns(2)
     
@@ -353,6 +355,12 @@ elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
     st.title("🌍 Cartografia Global: Biomes de la Terra (NF 1.1: A1, A2)")
     st.markdown("Unitats de gran extensió amb una vegetació climàtica uniforme i clima característic (NF1.1.BiomesdelaTerra_A1A2.pdf, p. 3).")
 
+    # Imatge per als Biomes de la Terra (Mapa)
+    st.image("
+
+[Image of World Biomes Map]
+", caption="Distribució Global dels Principals Biomes Terrestres")
+
     st.subheader("Definicions de Biomes Clau (Més Enllà del Mediterrani)")
     st.info("Aquesta secció inclou referències als biomes de Pastures i Sabana, esmentats en la classificació global (NF1.1. Biodiversidad, endemismes i biogeografia.pptx.pdf, p. 2).")
 
@@ -388,6 +396,8 @@ elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
                 * **Omnívors Destacats:** Porc senglar, rata de camp, Teixó.
                 """
             )
+            st.image("", caption="Linx ibèric, un carnívor clau del bioma mediterrani")
+
 
         with tab_estrategia:
             st.subheader("Clima i Sòl (Determinants del Bioma)")
@@ -402,6 +412,9 @@ elif pagina == "🌍 Biomes de la Terra (NF 1.1)":
 elif pagina == "🌲 Classificació dels Biomes Principals":
     st.title("🌲 Classificació dels Biomes Principals (NF 1.1: A2)")
     st.markdown("Anàlisi comparativa dels biomes de latituds extremes i humits.")
+
+    # Imatge per a la Classificació dels Biomes
+    st.image("", caption="Bosc de Coníferes (Taiga): Bosc Boreal")
 
     with st.expander("Fitxa Tècnica: Biomes de Latituds Altes i Grans Humitats", expanded=True):
         
@@ -451,8 +464,8 @@ elif pagina == "📊 Climogrames i Distribució":
     with st.expander("Detall Tècnic: Interpretació Visual i Regles Crítiques (Ampliat)", expanded=True):
         st.header("Mòdul: Interpretació Visual i Regla de Gaussen")
         
-        # Inserció de la imatge demanada pel client
-        st.image("https://www.meteorologiaenred.com/wp-content/uploads/2018/06/Climograma.jpg", caption="Exemple de Climograma de Walter i Lieth")
+        # Imatge per al Climograma (la que has pujat, si és possible, o una genèrica)
+        st.image("", caption="Exemple de Climograma de Walter i Lieth")
         
         st.subheader("1. ⚙️ Guia de Lectura i Escales (Regla de Gaussen)")
         
@@ -521,6 +534,10 @@ elif pagina == "🇪🇸 Hàbitats Peninsulars i Protecció (NF 1.2/1.3)":
     st.title("🇪🇸 Regions Biogeogràfiques i Classificació (NF 1.2 & NF 1.3)")
     st.markdown("La península es divideix en 4 regions principals (NF1.2.HabitatsaEspanya.pptx).")
 
+    # Imatge per a les Regions Biogeogràfiques
+    st.image("", caption="Mapa de les Regions Biogeogràfiques de la Península Ibèrica")
+
+
     st.subheader("Mòdul NF 1.2: Anàlisi Densa de Regions Biogeogràfiques (A2)")
     
     reg_tab1, reg_tab2, reg_tab3, reg_tab4 = st.tabs(["[1] Eurosiberiana", "[2] Mediterrània", "[3] Macaronèsica", "[4] Alpina"])
@@ -572,6 +589,9 @@ elif pagina == "🇪🇸 Hàbitats Peninsulars i Protecció (NF 1.2/1.3)":
 elif pagina == "🏞️ Hàbitats de Catalunya (Detall Exhaustiu)":
     st.title("🏞️ Fitxer d'Hàbitats Nacionals (NF 1.2: A3)")
     st.markdown("La gran varietat geogràfica de Catalunya resulta en una elevada diversitat d'hàbitats.")
+
+    # Imatge per als Hàbitats de Catalunya
+    st.image("", caption="La Fageda d'en Jordà, exemple d'hàbitat medioeuropeu")
     
     hab_tab1, hab_tab2, hab_tab3 = st.tabs(["[1] Boscos de Fulla Caduca i Perenne", "[2] Boscos de Pi i Formacions Arbustives", "[3] Formacions Herbàcies (Detall)"])
 
@@ -657,6 +677,9 @@ elif pagina == "🌱 Adaptacions i Biodiversitat (NF 1.1)":
     st.title("🌱 Adaptacions i Biodiversitat (NF 1.1)")
     st.markdown("Respostes dels éssers vius als factors ambientals extrems.")
 
+    # Imatge per a les Adaptacions
+    st.image("", caption="Exemple de planta xeròfila (suculenta) adaptada a la sequera")
+
     with st.expander("Mòdul [1]: Adaptacions Tèrmiques, Hídriques i Lumíniques (Detall Exhaustiu)", expanded=True):
         
         adapt_tab1, adapt_tab2, adapt_tab3 = st.tabs(["[A] Límits Tèrmics Crítics", "[B] Sequera/Xeròfiles", "[C] Fred, Llum i Foc"])
@@ -725,6 +748,7 @@ elif pagina == "🌱 Adaptacions i Biodiversitat (NF 1.1)":
                 * **Contrast:** **Cosmopolita** (espècie distribuïda per tot el món, ex: *Circaetus gallicus* - Au migradora) (NF1.1, p. 14).
                 """
             )
+
 
 elif pagina == "❓ Posa't a Prova! (Quiz)":
     run_quiz()
