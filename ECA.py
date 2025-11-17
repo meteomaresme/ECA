@@ -2,155 +2,164 @@ import streamlit as st
 
 # --- Configuració General de la Pàgina ---
 st.set_page_config(
-    page_title="Repàs Didàctic: Biogeografia, Hàbitats i HIC",
+    page_title="Repàs Rigorós: Biogeografia, Conservació i HIC",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # --- Títol Principal ---
-st.title("📚 Repàs Minimalista i Didàctic: Tots els Conceptes Clau")
-st.subheader("Explicacions Clares per a l'Examen")
+st.title("🔬 Repàs Exhaustiu: Biomes, Biodiversitat i Hàbitats (Nivell Avançat)")
+st.subheader("Anàlisi Densa de Conceptes i Factors Edafo-climàtics")
 
 # ==========================================================================
 # SECCIÓ 1: ECOLOGIA DE MACROESCALA (BIOMES I CLIMA)
 # ==========================================================================
-st.header("1. 🌍 BIOMES I CLIMA")
+st.header("1. 🌍 BIOMES I CLIMA: L'Escala Geogràfica")
 st.markdown("---")
 
-st.subheader("Bioma: Definició i Diferenciació")
+st.subheader("1.1. Bioma: Definició Taxonòmica i Factors Zonal")
 st.markdown("""
-* **Definició:** És la unitat biogeogràfica més gran. Representa un conjunt de comunitats que ocupen una àrea extensa amb un **clima zonal (característic)** i una **vegetació climàtica uniforme**. Són la màxima expressió de la relació clima-vegetació.
-* **Diferenciació:** Els principals biomes es distingeixen gairebé exclusivament pels valors mitjans de **Temperatura** i **Precipitació** (ex: Selva vs. Tundra).
+El **Bioma** és la major unitat d'organització ecològica terrestre, representant un sistema amb una estructura d'ecosistemes semblants.
+* **Definició Clàssica:** Conjunt d'organismes i comunitats que ocupen una àrea geogràfica d'extensió continental.
+* **Característiques:** Establerts per un **Clima Zonal** dominant i la conseqüent **Vegetació Climax uniforme** (determinada pels paràmetres tèrmics i hídrics).
+* **Principals Biomes (Diferenciació):** Es classifiquen segons la combinació de **Temperatura** i **Precipitació**. Això dona lloc a la distribució de Boscos Tropicals, Deserts, Tundres, etc., seguint els gradients latitudinals i altitudinals.
 """)
 
-st.subheader("Climograma: Funcionament i Interpretació")
+st.subheader("1.2. Climograma i Bioclimatologia")
 st.markdown("""
-* **Com Funciona:** Representa la **Temperatura mitjana** (línia) i la **Precipitació total** (barres) al llarg de l'any. S'utilitza l'escala $1^{\circ}C \approx 2 mm$ de pluja.
-* **Què Indica:** Ajuda a identificar l'**Aridesa Fisiològica** (època seca). Si la línia de Temperatura queda visiblement per sobre de la de Precipitació, la demanda d'evaporació supera l'aigua disponible.
-* **Clima Mediterrani:** L'exemple clàssic amb una **aridesa estival** molt marcada (T alta per sobre de P a l'estiu).
+El Climograma (o diagrama Ombrothermic de Walter) és la síntesi gràfica del règim termohídric.
+* **Funció Clau:** Permet determinar la **bioclimatologia** del lloc i la presència de l'**Aridesa Fisiològica** (època seca).
+* **Regla 1:2:** Escala on $1^{\circ}C$ equival a $2 mm$ de precipitació. Si la corba de T supera P, hi ha un dèficit hídric on la demanda evapotranspirativa supera l'aportació.
+* **Climes Ibèrics:** S'evidencia la diferència entre el règim **Mediterrani** (T alta > P a l'estiu) i l'**Eurosiberià** (T < P durant gran part de l'any).
 """)
 
-st.subheader("Adaptacions Morfològiques de la Flora")
+st.subheader("1.3. Adaptacions Morfològiques de la Flora")
 st.table({
-    "Adaptació": ["**Escleròfil·la**", "**Caducifoli**", "**Xeròfita**"],
-    "Què és (Mecanisme)": ["Fulles dures, petites i amb cutícula gruixuda.", "Pèrdua de fulla a l'hivern.", "Emmagatzematge d'aigua (succulència) o transformació en espines."],
-    "Per a Què Serveix": ["Reduir al màxim la **transpiració** durant la sequera estival.", "Evitar la pèrdua d'aigua per **congelació** o l'estrès de sequera hivernal.", "Garantir la supervivència en ambients amb **estrès hídric extrem**."],
+    "Adaptació": ["**Escleròfil·la**", "**Caducifoli**", "**Xeròfita**", "**Psicròfita**"],
+    "Mecanisme Fisiològic": ["Fulles dures, amb cutícula gruixuda i reducció de la superfície.", "Abscisió (pèrdua de fulla) estacional.", "Succulència (emmagatzematge), estomes enfonsats, espines.", "Port baix, protecció contra el vent i l'estrès per gelada."],
+    "Condició Superada": ["Estrès per sequera i calor estival (Mediterrani).", "Estrès per fred o sequera estacional (Eurosiberià).", "Aridesa extrema i dèficit hídric permanent (Desert).", "Temperatures molt baixes i vents (Alta Muntanya, Tundra)."],
 })
 
 # ==========================================================================
-# SECCIÓ 2: BIODIVERSITAT I ESPECIACIÓ
+# SECCIÓ 2: BIODIVERSITAT, ESPECIACIÓ I AMENACES
 # ==========================================================================
 st.header("2. 🦋 BIODIVERSITAT, AMENACES I ENDEMISME")
 st.markdown("---")
 
-st.subheader("Diversitat (Biodiversitat)")
+st.subheader("2.1. Definició Multifacètica de Diversitat")
 st.markdown("""
-* **Definició:** La **varietat de vida** a la Terra. Es mesura a tres nivells interconnectats: **Genètica** (dins l'espècie), d'**Espècies** (riquesa i abundància) i d'**Ecosistemes** (varietat d'hàbitats).
+La **Biodiversitat** és la variació de la vida en tots els seus nivells d'organització.
+* **Diversitat Genètica (Alfa):** Variabilitat d'al·lels dins d'una mateixa espècie o població. Essencial per a l'adaptació evolutiva.
+* **Diversitat d'Espècies (Beta/Gamma):** Mesura la riquesa (nombre d'espècies) i l'equitat (abundància relativa).
+* **Diversitat d'Ecosistemes/Hàbitats:** Varietat de comunitats, processos i ambients a un nivell paisatgístic.
 """)
 
-st.subheader("Principals Amenaces")
+st.subheader("2.2. Amenaces Antropogèniques (Causes Primàries)")
 st.markdown("""
-* Les cinc grans amenaces (HIPPO):
-    1.  **Pèrdua i Fragmentació d'Hàbitat:** La causa principal a nivell global.
-    2.  **Sobreexplotació:** Ús extractiu no sostenible de recursos.
-    3.  **Contaminació:** Degradació química i física dels medis.
-    4.  **Espècies Invasores:** Desplaçament de les espècies natives.
-    5.  **Canvi Climàtic:** Alteració ràpida de les condicions ambientals.
+Les **Amenaces Principals** a la biodiversitat són d'origen humà (antropogènic):
+* **Pèrdua i Fragmentació d'Hàbitats:** El motor principal de la crisi. La reducció de l'àrea d'hàbitat i la seva divisió en petits fragments (efecte vora) aïllen les poblacions.
+* **Espècies Invasores:** L'entrada d'espècies exòtiques que competeixen amb les natives o les depredan.
+* **Canvi Climàtic:** Alteració ràpida dels règims climàtics, superant la capacitat d'adaptació evolutiva de moltes espècies.
 """)
 
-st.subheader("Endemisme i Hotspots")
+st.subheader("2.3. Endemisme, Insularitat i Hotspots")
 st.markdown("""
-* **Endemisme:** Condició d'una espècie que es troba de forma **exclusiva i natural** en una regió geogràfica molt concreta (ex: només a Mallorca).
-* **Com es Forma:** El mecanisme principal és l'**aïllament geogràfic**, que atura el flux gènic i permet a la població aïllada evolucionar de manera divergent (especiació al·lopàtrida).
-* **Insularitat-Endemisme:** La condició d'illa (o 'illa ecològica', com una muntanya alta) és el **factor que més l'afavoreix** per l'extrem aïllament que proporciona.
-* **Hotspot:** Regió amb un **alt endemisme** (mínim 1.500 plantes endèmiques) i una **alta amenaça** (pèrdua del 70% de l'hàbitat). Són prioritats de conservació.
+* **Endemisme:** Condició d'un tàxon (espècie, subespècie) amb una àrea de distribució **exclusivament limitada** a una àrea geogràfica concreta.
+* **Formació de l'Endemisme:** Resulta principalment de l'**Especiació Al·lopàtrida**, on una barrera geogràfica aïlla poblacions, interrompent el flux gènic i permetent la divergència evolutiva.
+* **Insularitat:** El factor **més influent** en la gènesi d'endemismes. Un aïllament geogràfic sever (illes, massissos muntanyosos) facilita la colonització, l'aïllament i la posterior evolució in situ.
+* **Hotspot de Biodiversitat:** Regió biogeogràfica que compleix simultàniament dos criteris: **Alta Riquesa** (mínim 1.500 plantes endèmiques) i **Alta Amenaça** (pèrdua >70% de vegetació original). Són llocs clau per a la inversió en conservació.
 """)
 
 # ==========================================================================
 # SECCIÓ 3: ECOLOGIA DE MICROESCALA (HÀBITAT, BIOTIP, NÍNXOL)
 # ==========================================================================
-st.header("3. 🏠 HÀBITAT, BIOTIP I NÍNXOL ECOLÒGIC")
+st.header("3. 🏡 ECOLOGIA DE MICROESCALA: Hàbitat, Biotip i Nínxol")
 st.markdown("---")
 
-st.subheader("Hàbitat")
+st.subheader("3.1. Hàbitat i Requisits Vitals")
 st.markdown("""
-* **Definició:** És el **lloc físic** on viu un organisme o una població; la seva "adreça" ecològica.
-* **Elements Essencials:** Un hàbitat ha de proporcionar els recursos bàsics per a la vida: **Aigua, Aliment, Refugi (Cobert)** i **Llocs de Reproducció**.
+L'**Hàbitat** és el lloc físic definit pels seus factors abiòtics i biòtics on un organisme o població viu i es desenvolupa.
+* **Importància:** Si l'hàbitat es perd, l'espècie no pot complir el seu cicle vital.
+* **Elements Essencials de l'Hàbitat:** Són els factors necessaris per a la supervivència i la reproducció: **Aigua**, **Aliment/Nutrients**, **Refugi/Cobert** (protecció contra depredadors i clima) i **Llocs de Reproducció/Cria** (nidificació, posta, etc.).
 """)
 
-st.subheader("Biotip - Hàbitat - Nínxol Ecològic")
+st.subheader("3.2. Diferenciació Conceptual Rigorosa")
 st.table({
     "Concepte": ["**Biotip**", "**Hàbitat**", "**Nínxol Ecològic**"],
-    "Explicació Senzilla": ["Qui és l'organisme (característiques genètiques).", "On viu (el lloc físic).", "Què fa l'organisme (la seva funció, rols i interaccions a l'ecosistema)."],
+    "Explicació": ["Conjunt d'organismes amb el mateix **genotip** (molt específic). Unitat genètica.", "El **lloc físic** o l'entorn definit pels factors fisicoquímics i biològics. L'adreça ecològica.", "El **rol o funció** de l'espècie en l'ecosistema, definit per tots els seus requisits i interaccions biòtiques i abiòtiques. La 'professió' ecològica."],
 })
 
-st.subheader("Hàbitats Semi-Naturals")
+st.subheader("3.3. Hàbitats Semi-Naturals")
 st.markdown("""
-* Són hàbitats que han estat creats o mantinguts per l'**activitat humana tradicional** (ex: pastura o sega). Han adquirit un valor ecològic que depèn de la continuïtat d'aquesta gestió (ex: la **Devesa**).
+Són ecosistemes que han evolucionat sota una **influència humana sostinguda i de baixa intensitat** (ús tradicional). Tot i estar modificats, tenen un alt valor de biodiversitat. La seva conservació sovint requereix el manteniment de l'activitat humana tradicional.
+* **Exemple Clàssic:** Les **Deveses** ibèriques (pastura extensiva en bosc aclarit).
 """)
 
 # ==========================================================================
 # SECCIÓ 4: BIOGEOGRAFIA IBÈRICA: FACTORS I SÒL
 # ==========================================================================
-st.header("4. 🇪🇸 HÀBITATS DE LA PENÍNSULA IBÈRICA")
+st.header("4. 🇪🇸 BIOGEOGRAFIA IBÈRICA: Factors i Condicionants")
 st.markdown("---")
 
-st.subheader("Factors que Condicionen els Hàbitats d'Espanya")
+st.subheader("4.1. Factors Conditionants dels Hàbitats d'Espanya")
 st.markdown("""
-* **Regions Biogeogràfiques:** Espanya és la **transició** entre la regió **Mediterrània** (dominant) i l'**Eurosiberiana** (nord), més la **Macaronèsica** (Canàries). Aquesta barreja produeix una alta riquesa.
-* **Tipus de Sòl (Edatisme):** La geologia (roca mare) és clau, ja que determina la flora:
-    * **Sòls Silicis (àcids):** Per roques com el granit. Afavoreix la flora **acidòfila** (ex: Roure, Castanyer).
-    * **Sòls Calcaris (bàsics):** Per roques com la calcària. Afavoreix la flora **calcícola** (ex: Alzina, Pi Blanc).
+La gran riquesa d'hàbitats es deu a la confluència de tres factors principals:
+1.  **Clima (Zonal):** Domini Mediterrani, amb forts gradients climàtics cap al nord (Eurosiberià).
+2.  **Orografia (Relief):** Massissos muntanyosos que actuen com a barreres biogeogràfiques i creen climes microzonals (solana/obaga).
+3.  **Edatisme (Sòl):** La composició química de la roca mare és determinant per la flora.
+""")
+
+st.subheader("4.2. Tipus de Sòl (Edatisme) i Flora Indicadora")
+st.table({
+    "Tipus de Sòl": ["**Sòls Silicis**", "**Sòls Calcaris**", "**Sòls Al·luvials**"],
+    "Composició/pH": ["Rocs àcids (granit, pissarra, quarsita). pH àcid.", "Rocs bàsics (calcària, dolomia). pH bàsic/neutre.", "Sediments transportats per l'aigua. Rics en nutrients."],
+    "Flora Indicadora (Calcífuga/Calcícola)": ["Roure (*Q. robur*), Castanyer (*C. sativa*), Bruc (Flora Calcífuga).", "Alzina (*Q. ilex*), Pi Blanc (*P. halepensis*), Savina (Flora Calcícola).", "Bosc de Ribera (Àlbers, Salzes)."],
+})
+
+st.subheader("4.3. Regions Biogeogràfiques")
+st.markdown("""
+* **Regió Mediterrània:** Clima amb sequera estival (adaptació escleròfil·la).
+* **Regió Eurosiberiana (o Atlàntica):** Clima humit i temperat (adaptació caducifòlia).
+* **Regió Macaronèsica:** Clima subtropical insular (endemismes com la Laurisilva a Canàries).
 """)
 
 # ==========================================================================
 # SECCIÓ 5: VEGETACIÓ I FORMACIONS
 # ==========================================================================
-st.header("5. 🌳 FORMACIONS VEGETALS: Boscos i Biòtops")
+st.header("5. 🌳 FORMACIONS VEGETALS: Estructura i Biòtops")
 st.markdown("---")
 
-st.subheader("Vegetació Potencial i Bosc")
+st.subheader("5.1. Bosc (Climax) i Estrats")
 st.markdown("""
-* **Vegetació Potencial:** La vegetació clímax que es desenvoluparia sense interferència humana, determinada pel clima i el sòl.
-* **Bosc:** Formació amb alta densitat d'arbres que crea un dosser tancat.
+* **Vegetació Potencial:** La formació vegetal clímax que s'establiria en absència de pertorbacions. És la referència ecològica de la zona.
+* **Bosc:** Comunitat arbòria amb dosser tancat.
+    * **Sotabosc:** L'estrat inferior (arbusts, herbes) sota la volta arbòria. Crucial per a la regeneració.
+    * **Bosc de Ribera (Azonal):** Hàbitats vegetals lligats a cursos d'aigua (rius, torrents) on la disponibilitat hídrica és constant, independentment del clima zonal.
 """)
 
-st.subheader("Tipus de Boscos i Noms Científics")
-st.table({
-    "Tipus de Bosc": ["**Bosc Caducifoli**", "**Bosc Mediterrani (Escleròfil·le)**", "**Bosc de Ribera**"],
-    "Regió / Característica": ["Eurosiberiana (humit i fred).", "Mediterrània (sec i calorós a l'estiu).", "Azonal (lligat a l'aigua freàtica)."],
-    "Noms Científics Dominants": ["*Quercus robur* (Roure), *Fagus sylvatica* (Faig).", "*Quercus ilex* (Alzina), *Quercus suber* (Suro).", "*Populus alba* (Àlber), *Salix sp.* (Salze)."],
-})
-
-st.subheader("Formacions Arbustives, Herbàcies i Estrats")
+st.subheader("5.2. Classificació de Formacions Arbustives i Herbàcies")
 st.markdown("""
-* **Sotabosc:** L'estrat vegetal que creix sota el dosser dels arbres (arbustos i herbes).
-* **Formacions Arbustives (Matoll):** Són estadis de substitució del bosc potencial.
-    * **Màquia:** Matollar alt i dens.
-    * **Garriga:** Matollar baix i esclarissat (sovint sobre sòls calcaris).
-* **Formacions Herbàcies:** Dominades per gramínies (Prats i Estepes).
-* **Principals Biòtops:** Classificacions de grans hàbitats: Boscos, Matolls, Aigües continentals, Costes, etc.
+* **Formacions Arbustives (Matolls):** Solen ser estadis de degradació del bosc o hàbitats climàcics en condicions extremes (vent, fred).
+    * **Màquia:** Matollar alt, dens i sovint escleròfil·le (ex: Llorer, Càdec).
+    * **Garriga:** Matollar baix i esclarissat, típicament sobre sòls calcaris (ex: Romaní, Estepa).
+* **Formacions Herbàcies:** Prats (amb domini de gramínies) que poden ser naturals o seminaturals (prats de sega).
+* **Principals Biòtops:** Classificació de grans hàbitats naturals a la Península (Costes i Dunes, Aigües Marines, Boscos, Matolls, Roques i Coves).
 """)
 
 # ==========================================================================
-# SECCIÓ 6: INVENTARIS I CONSERVACIÓ
+# SECCIÓ 6: INVENTARIS I CONSERVACIÓ (HIC)
 # ==========================================================================
-st.header("6. 🇪🇺 INVENTARIS I CONSERVACIÓ (HIC)")
+st.header("6. 🇪🇺 GESTIÓ I CONSERVACIÓ: CORINE i HIC")
 st.markdown("---")
 
-st.subheader("Projecte CORINE")
+st.subheader("6.1. Projecte CORINE i Natura 2000")
 st.markdown("""
-* **Què és?:** El sistema d'inventari ambiental de la UE. El **CORINE Biotopes** va ser la base per identificar els llocs naturals d'interès, donant lloc a la **Xarxa Natura 2000**.
+* **Projecte CORINE Biotopes:** L'inventari de llocs d'interès que va precedir la Directiva Hàbitats (92/43/CEE). Va establir una classificació harmonitzada dels hàbitats europeus.
+* **Xarxa Natura 2000:** Xarxa ecològica europea formada per les **ZEC** (Zones Especials de Conservació, creades pels HIC) i les **ZEPA** (Zones d'Especial Protecció per a les Aus).
 """)
 
-st.subheader("Hàbitats d'Interès Comunitari (HIC)")
+st.subheader("6.2. Hàbitats d'Interès Comunitari (HIC)")
 st.markdown("""
-* **Què són?:** Hàbitats naturals o seminaturals recollits a l'Annex I de la Directiva Hàbitats (92/43/CEE) que es consideren essencials per a la biodiversitat europea.
-* **Importància:** La seva presència obliga a designar **Zones Especials de Conservació (ZEC)**.
-""")
-
-st.subheader("Factors de Selecció dels HIC a Espanya")
-st.markdown("""
-* La selecció reflecteix la **transició biogeogràfica** del territori (necessitat de protegir tant hàbitats mediterranis com eurosiberians i macaronèsics).
-* Inclou HIC que depenen de la roca (Factors Edàfics), protegint boscos i matolls lligats específicament a **sòls calcaris** o **sòls silicis**.
+* **HIC:** Hàbitats naturals o seminaturals recollits a l'Annex I de la Directiva Hàbitats. Són crucials per a la biodiversitat europea i requereixen la designació de ZEC.
+* **Factors de Selecció a Espanya:** La llista reflecteix la **transició biogeogràfica** (protecció d'hàbitats eurosiberians únics al sud) i la dependència del substrat geològic (HIC lligats a sòls silicats vs. calcaris).
 """)
